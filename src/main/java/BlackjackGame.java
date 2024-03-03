@@ -12,11 +12,18 @@ public class BlackjackGame {
         return 0.0;
     }
 
-    public void setBet(double bet) {
-        this.currentBet = bet;
+    //sets up the beginning of the game
+    public void beginGame(double bet){
+        setBet(bet);
+        this.playerHand = theDealer.dealHand();
+        this.bankerHand = theDealer.dealHand();
     }
+    public void setBet(double bet) {this.currentBet = bet;}
     public double getBet() {
         return currentBet;
     }
+    public ArrayList<Card> getUserCards() {return playerHand;}
+    public ArrayList<Card> getBankerCards() {return bankerHand;}
+
 
 }
