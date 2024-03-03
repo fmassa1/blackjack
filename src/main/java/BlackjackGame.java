@@ -18,6 +18,13 @@ public class BlackjackGame {
         this.playerHand = theDealer.dealHand();
         this.bankerHand = theDealer.dealHand();
     }
+    public void playerHit() {this.playerHand.add(theDealer.drawOne());}
+    public void bankerHit() {
+        while (gameLogic.evaluateBankerDraw(bankerHand))
+            this.playerHand.add(theDealer.drawOne());
+    }
+
+
     public void setBet(double bet) {this.currentBet = bet;}
     public double getBet() {
         return currentBet;
