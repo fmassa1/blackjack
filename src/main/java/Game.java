@@ -13,16 +13,21 @@ import javafx.geometry.Pos;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.util.converter.IntegerStringConverter;
+
 
 public class Game extends Application {
     private Button b1, b2, b3, b4;
     private TextField t1, t2;
     private VBox v1, v2;
 
+    private BlackjackGame game;
+
     public static void main(String[] args) {launch(args);}
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        BlackjackGame game = new BlackjackGame();
 
         primaryStage.setTitle("Blackjack");
         BorderPane border = new BorderPane();
@@ -31,11 +36,14 @@ public class Game extends Application {
 
         //start of scene 1 code
         b1 = new Button("Start Game");
+        b1.setPrefWidth(150);
+
         t1 = new TextField();
+        t1.setPrefWidth(150);
         t1.setPromptText("enter starting of money");
-        t1.setPrefWidth(250);
         t1.setAlignment(Pos.CENTER);
         border.setMargin(t1, new Insets(12,12,12,12));
+
 
         Text title = new Text();
         title.setText("Blackjack");
@@ -47,6 +55,8 @@ public class Game extends Application {
         border.setCenter(title);
         v1.setAlignment(Pos.CENTER);
         border.setMargin(v1, new Insets(12,12,250,12));
+
+        Scene scene = new Scene(border,700,700);
         //end of scene 1 code
 
         //start of scene 2 code
@@ -76,10 +86,28 @@ public class Game extends Application {
         v2.setAlignment(Pos.BOTTOM_CENTER);
         border2.setMargin(v2, new Insets(12,12,12,12));
         //end of scene 2 code
-
-        Scene scene = new Scene(border,700,700);
         Scene scene2 = new Scene(border2,700,700);
-        primaryStage.setScene(scene2);
+        b1.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    String inputText = t1.getText();
+                    int money = Integer.parseInt(inputText);
+                    game.setBet(money);
+                    System.out.println(game.getBet());
+                    primaryStage.setScene(scene2);
+
+
+                } catch (NumberFormatException e) {
+                    t1.clear();
+                    t1.setPromptText("Error: enter a number");
+                }
+            }
+        });
+
+
+
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 
