@@ -25,7 +25,7 @@ import java.util.ArrayList;
 public class Game extends Application {
     private Button startB, hitB, standB, raiseB, menuB, betB;
     private TextField t1, t2, t3;
-    private VBox v1, v2, v3, betV;
+    private VBox v1, v2, bankerV, userV, betV;
     private HBox h1,h2;
 
     private BlackjackGame game;
@@ -80,6 +80,7 @@ public class Game extends Application {
 
         betB = new Button("Begin");
         betB.setAlignment(Pos.CENTER);
+        betB.setPrefWidth(150);
         Text betTitle = new Text();
         betTitle.setText("Place your bet");
         betTitle.setFont(Font.font("Arial", 48));
@@ -91,9 +92,10 @@ public class Game extends Application {
         t3.setAlignment(Pos.CENTER);
 
         betV = new VBox(20, betB, t3);
+        betV.setAlignment(Pos.CENTER);
         betBorder.setBottom(betV);
         betBorder.setCenter(betTitle);
-        betB.setAlignment(Pos.CENTER);
+
         betBorder.setMargin(betV, new Insets(12,12,250,12));
 
         Scene betScreen = new Scene(betBorder,700,700);
@@ -116,9 +118,14 @@ public class Game extends Application {
         t2.setAlignment(Pos.CENTER);
 
         Text bankerLabel = new Text();
-        bankerLabel.setText("Banker Hand");
+        bankerLabel.setText("Banker's Hand");
         bankerLabel.setFont(Font.font("Arial", 24));
         BorderPane.setAlignment(bankerLabel, Pos.CENTER);
+
+        Text userLabel = new Text();
+        userLabel.setText("Player's Hand");
+        userLabel.setFont(Font.font("Arial", 24));
+        BorderPane.setAlignment(userLabel, Pos.CENTER);
 
         menuB = new Button("Return to Menu");
         menuB.setPrefWidth(150);
@@ -149,34 +156,39 @@ public class Game extends Application {
             public void handle(ActionEvent event) {
                 try {
                     String inputText = t3.getText();
-                    game.setBet(Integer.parseInt(inputText));
-
-
-                    //display user cards
-                    ArrayList<Card> userCards = game.getUserCards();
-                    h1 = new HBox();
-                    for(Card curCard : userCards) {
-                        h1.getChildren().add(getCardImage(curCard.getValue()+curCard.getSuit()+".png"));
+                    double bet = Integer.parseInt(inputText);
+                    if(bet > game.getUserMoney()) {
+                        t3.clear();
+                        t3.setPromptText("bet too big");
                     }
-                    ArrayList<Card> bankerCards = game.getBankerCards();
-                    h2 = new HBox();
-                    h2.getChildren().add(getCardImage(game.getBankerCards().get(0).getValue() + game.getBankerCards().get(0).getSuit() + ".png"));
-                    h2.getChildren().add(getCardImage("blank.png"));
+                    else {
 
+                        //display user cards
+                        ArrayList<Card> userCards = game.getUserCards();
+                        h1 = new HBox();
+                        for (Card curCard : userCards) {
+                            h1.getChildren().add(getCardImage(curCard.getValue() + curCard.getSuit() + ".png"));
+                        }
+                        ArrayList<Card> bankerCards = game.getBankerCards();
+                        h2 = new HBox();
+                        h2.getChildren().add(getCardImage(game.getBankerCards().get(0).getValue() + game.getBankerCards().get(0).getSuit() + ".png"));
+                        h2.getChildren().add(getCardImage("blank.png"));
 
-                    h1.setAlignment(Pos.CENTER);
-                    h2.setAlignment(Pos.CENTER);
-                    //end card2
-                    v2 = new VBox(20, hitB, standB, raiseB,t2);
-                    v3 = new VBox(20, bankerLabel, h2);
-                    border2.setLeft(v2);
-                    border2.setBottom(h1);
-                    border2.setCenter(v3);
-                    v2.setAlignment(Pos.BOTTOM_CENTER);
-                    border2.setMargin(v2,new Insets(12,12,12,12));
-                    border2.setMargin(v3,new Insets(12,12,12,12));
+                        h1.setAlignment(Pos.CENTER);
+                        h2.setAlignment(Pos.CENTER);
+                        //end card2
+                        v2 = new VBox(20, hitB, standB, raiseB, t2);
+                        bankerV = new VBox(20, bankerLabel, h2);
+                        userV = new VBox(20, h1, userLabel);
+                        border2.setLeft(v2);
+                        border2.setBottom(userV);
+                        border2.setCenter(bankerV);
+                        v2.setAlignment(Pos.BOTTOM_CENTER);
+                        border2.setMargin(v2, new Insets(12, 12, 12, 12));
+                        border2.setMargin(bankerV, new Insets(12, 12, 12, 12));
 
-                    primaryStage.setScene(firstScene);
+                        primaryStage.setScene(firstScene);
+                    }
 
 
                 } catch (NumberFormatException e) {
@@ -185,8 +197,6 @@ public class Game extends Application {
                 }
             }
         });
-
-
 
         //hit button event
         hitB.setOnAction(new EventHandler<ActionEvent>() {
@@ -230,5 +240,4 @@ public class Game extends Application {
         primaryStage.setScene(startScreen);
         primaryStage.show();
     }
-
 }
