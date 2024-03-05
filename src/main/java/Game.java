@@ -19,14 +19,24 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.converter.IntegerStringConverter;
 
+import java.util.ArrayList;
+
 
 public class Game extends Application {
-    private Button b1, b2, b3, b4,menu;
-    private TextField t1, t2,t3;
-    private VBox v1, v2,v3,v4;
+    private Button startB, hitB, standB, raiseB, menuB, betB;
+    private TextField t1, t2, t3;
+    private VBox v1, v2, v3, betV;
     private HBox h1,h2;
 
     private BlackjackGame game;
+
+    public ImageView getCardImage(String curCard) {
+        Image curImage = new Image(curCard);
+        ImageView curView = new ImageView(curImage);
+        curView.setFitWidth(100);
+        curView.setFitHeight(150);
+        return curView;
+    }
 
     public static void main(String[] args) {launch(args);}
 
@@ -39,9 +49,9 @@ public class Game extends Application {
         border.setPadding(new Insets(12));
 
 
-        //start of scene 1 code
-        b1 = new Button("Start Game");
-        b1.setPrefWidth(150);
+        //start of StartScreen code
+        startB = new Button("Start Game");
+        startB.setPrefWidth(150);
 
         t1 = new TextField();
         t1.setPrefWidth(150);
@@ -55,111 +65,77 @@ public class Game extends Application {
         title.setFont(Font.font("Arial", 48));
         BorderPane.setAlignment(title, Pos.CENTER);
 
-        v1 = new VBox(20, b1, t1);
+        v1 = new VBox(20, startB, t1);
         border.setBottom(v1);
         border.setCenter(title);
         v1.setAlignment(Pos.CENTER);
         border.setMargin(v1, new Insets(12,12,250,12));
 
-        Scene scene = new Scene(border,700,700);
-        //end of scene 1 code
+        Scene startScreen = new Scene(border,700,700);
+        //end of StartScreen code
 
-        //start of scene2 code
+        //start of bet screen
+        BorderPane betBorder = new BorderPane();
+        betBorder.setPadding(new Insets(12));
+
+        betB = new Button("Begin");
+        betB.setAlignment(Pos.CENTER);
+        Text betTitle = new Text();
+        betTitle.setText("Place your bet");
+        betTitle.setFont(Font.font("Arial", 48));
+        BorderPane.setAlignment(betTitle, Pos.CENTER);
+
+        t3 = new TextField();
+        t3.setPromptText("enter bet amount");
+        t3.setPrefWidth(150);
+        t3.setAlignment(Pos.CENTER);
+
+        betV = new VBox(20, betB, t3);
+        betBorder.setBottom(betV);
+        betBorder.setCenter(betTitle);
+        betB.setAlignment(Pos.CENTER);
+        betBorder.setMargin(betV, new Insets(12,12,250,12));
+
+        Scene betScreen = new Scene(betBorder,700,700);
+        //end of bet screen
+
+        //start of firstScene code
         BorderPane border2 = new BorderPane();
         border2.setPadding(new Insets(12));
 
-        b2 = new Button("Hit");
-        b3 = new Button("Stand");
-        b4 = new Button("Raise Bet");
-        b2.setPrefWidth(150);
-        b3.setPrefWidth(150);
-        b4.setPrefWidth(150);
+        hitB = new Button("Hit");
+        standB = new Button("Stand");
+        raiseB = new Button("Raise Bet");
+        hitB.setPrefWidth(150);
+        standB.setPrefWidth(150);
+        raiseB.setPrefWidth(150);
 
         t2 = new TextField();
         t2.setPromptText("enter raise amount");
         t2.setPrefWidth(150);
         t2.setAlignment(Pos.CENTER);
 
-        Text title2 = new Text();
-        title2.setText("Banker Hand");
-        title2.setFont(Font.font("Arial", 24));
-        BorderPane.setAlignment(title2, Pos.CENTER);
-        //testPublish image
-        //h1 = new HBox();
-        //Image cardImage = new Image("1Clubs.png");
-        //ImageView imageView = new ImageView(cardImage);
-        //imageView.setFitWidth(100); //
-        //imageView.setFitHeight(150); //
-        //h1.getChildren().add(imageView);
-        //h1.setAlignment(Pos.CENTER);
-        //border2.setCenter(h1);
-        // endPublish image
-        // menu code start
-        menu = new Button("Return to Menu");
-        menu.setPrefWidth(150);
-        v3= new VBox(20,menu);
-        v3.setAlignment(Pos.TOP_RIGHT);
-        border2.setRight(v3);
-        // menu end
+        Text bankerLabel = new Text();
+        bankerLabel.setText("Banker Hand");
+        bankerLabel.setFont(Font.font("Arial", 24));
+        BorderPane.setAlignment(bankerLabel, Pos.CENTER);
 
-        //code moved to inside handle() below to generate image of user cards
-        //v2 = new VBox(20, b2, b3, b4,t2,h1);
-        //border2.setLeft(v2);
-        //border2.setCenter(title2);
-        //v2.setAlignment(Pos.BOTTOM_CENTER);
-        //border2.setMargin(v2,new Insets(12,12,12,12));
-        //end of scene 2 code
-        Scene scene2 = new Scene(border2,700,700);
-        b1.setOnAction(new EventHandler<ActionEvent>() {
+        menuB = new Button("Return to Menu");
+        menuB.setPrefWidth(150);
+        border2.setTop(menuB);
+        border2.setCenter(bankerLabel);
+        menuB.setAlignment((Pos.CENTER));
+
+        Scene firstScene = new Scene(border2,700,700);
+
+        startB.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent event) {
+            public void handle(ActionEvent actionEvent) {
                 try {
-
                     String inputText = t1.getText();
                     game.beginGame(Integer.parseInt(inputText));
-                    game.getUserCards().get(0).printCard();
-                    //output card 1
-                    HBox cardBox = new HBox();
-                    h1 = new HBox();
-                    int val = game.getUserCards().get(0).getValue();
-                    String suit = game.getUserCards().get(0).getSuit();
-                    String card1 = val+suit+".png";
-                    Image c1Image = new Image(card1);
-                    ImageView c1View = new ImageView(c1Image);
-                    c1View.setFitWidth(100); //
-                    c1View.setFitHeight(150); //
-                    h1.getChildren().add(c1View);
-                    h1.setAlignment(Pos.CENTER);
-                    //adds card1 to box
-                    cardBox.getChildren().add(h1);
-                    //border2.setCenter(h1);
-                    //end card1
-                    //start card2
-                    game.getUserCards().get(1).printCard();
-                    h2 = new HBox();
-                    int val2 = game.getUserCards().get(1).getValue();
-                    String suit2 = game.getUserCards().get(1).getSuit();
-                    String card2 = val2+suit2+".png";
-                    Image c2Image = new Image(card2);
-                    ImageView c2View = new ImageView(c2Image);
-                    c2View.setFitWidth(100); //
-                    c2View.setFitHeight(150); //
-                    h2.getChildren().add(c2View);
-                    h2.setAlignment(Pos.CENTER);
-                    //card2 add to box
-                    cardBox.getChildren().add(h2);
-                    //border2.setCenter(h2);
-                    //end card2
+                    primaryStage.setScene(betScreen);
 
-                    v2 = new VBox(20, b2, b3, b4,t2,cardBox);
-                    border2.setLeft(v2);
-                    border2.setCenter(title2);
-                    v2.setAlignment(Pos.BOTTOM_CENTER);
-                    border2.setMargin(v2,new Insets(12,12,12,12));
-
-
-                    //game.getUserCards().get(1).printCard();
-                    primaryStage.setScene(scene2);
 
 
                 } catch (NumberFormatException e) {
@@ -168,29 +144,70 @@ public class Game extends Application {
                 }
             }
         });
+        betB.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    String inputText = t3.getText();
+                    game.setBet(Integer.parseInt(inputText));
+
+
+                    //display user cards
+                    ArrayList<Card> userCards = game.getUserCards();
+                    h1 = new HBox();
+                    for(Card curCard : userCards) {
+                        h1.getChildren().add(getCardImage(curCard.getValue()+curCard.getSuit()+".png"));
+                    }
+                    ArrayList<Card> bankerCards = game.getBankerCards();
+                    h2 = new HBox();
+                    h2.getChildren().add(getCardImage(game.getBankerCards().get(0).getValue() + game.getBankerCards().get(0).getSuit() + ".png"));
+                    h2.getChildren().add(getCardImage("blank.png"));
+
+
+                    h1.setAlignment(Pos.CENTER);
+                    h2.setAlignment(Pos.CENTER);
+                    //end card2
+                    v2 = new VBox(20, hitB, standB, raiseB,t2);
+                    v3 = new VBox(20, bankerLabel, h2);
+                    border2.setLeft(v2);
+                    border2.setBottom(h1);
+                    border2.setCenter(v3);
+                    v2.setAlignment(Pos.BOTTOM_CENTER);
+                    border2.setMargin(v2,new Insets(12,12,12,12));
+                    border2.setMargin(v3,new Insets(12,12,12,12));
+
+                    primaryStage.setScene(firstScene);
+
+
+                } catch (NumberFormatException e) {
+                    t3.clear();
+                    t3.setPromptText("Error: enter a number");
+                }
+            }
+        });
 
 
 
         //hit button event
-        b2.setOnAction(new EventHandler<ActionEvent>() {
+        hitB.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 game.playerHit();
-                b4.setDisable(true);
-                b4.setText("");
+                raiseB.setDisable(true);
+                raiseB.setText("");
                 t2.clear();
                 t2.setText("No more bets");
                 t2.setEditable(false);
             }
         });
         //raise button and text box event
-        b4.setOnAction(new EventHandler<ActionEvent>() {
+        raiseB.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 try {
                     String inputText = t2.getText();
                     game.setBet(Integer.parseInt(inputText) + game.getBet());
-                    b4.setDisable(true);
+                    raiseB.setDisable(true);
                     t2.clear();
                     t2.setText("Bet now $" + game.getBet());
                     t2.setEditable(false);
@@ -201,10 +218,16 @@ public class Game extends Application {
                 }
             }
         });
+        menuB.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                primaryStage.setScene(startScreen);
+                t1.clear();
+                System.out.println("Bet now $" + game.getBet());
+            }
+        });
 
-
-
-        primaryStage.setScene(scene);
+        primaryStage.setScene(startScreen);
         primaryStage.show();
     }
 
