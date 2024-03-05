@@ -25,7 +25,7 @@ import java.util.ArrayList;
 public class Game extends Application {
     private Button startB, hitB, standB, raiseB, menuB, betB;
     private TextField t1, t2, t3;
-    private VBox v1, v2, bankerV, userV, betV;
+    private VBox v1, v2, bankerV, userV, betV, mainV;
     private HBox h1,h2;
 
     private BlackjackGame game;
@@ -169,7 +169,6 @@ public class Game extends Application {
                         for (Card curCard : userCards) {
                             h1.getChildren().add(getCardImage(curCard.getValue() + curCard.getSuit() + ".png"));
                         }
-                        ArrayList<Card> bankerCards = game.getBankerCards();
                         h2 = new HBox();
                         h2.getChildren().add(getCardImage(game.getBankerCards().get(0).getValue() + game.getBankerCards().get(0).getSuit() + ".png"));
                         h2.getChildren().add(getCardImage("blank.png"));
@@ -178,14 +177,22 @@ public class Game extends Application {
                         h2.setAlignment(Pos.CENTER);
                         //end card2
                         v2 = new VBox(20, hitB, standB, raiseB, t2);
-                        bankerV = new VBox(20, bankerLabel, h2);
-                        userV = new VBox(20, h1, userLabel);
-                        border2.setLeft(v2);
-                        border2.setBottom(userV);
-                        border2.setCenter(bankerV);
                         v2.setAlignment(Pos.BOTTOM_CENTER);
+
+                        bankerV = new VBox(20, bankerLabel, h2);
+                        bankerV.setAlignment(Pos.CENTER);
+                        userV = new VBox(20, h1, userLabel);
+                        userV.setAlignment(Pos.CENTER);
+
+                        mainV = new VBox(150, bankerV, userV);
+
+                        border2.setLeft(v2);
+                        border2.setCenter(mainV);
                         border2.setMargin(v2, new Insets(12, 12, 12, 12));
-                        border2.setMargin(bankerV, new Insets(12, 12, 12, 12));
+                        border2.setMargin(mainV, new Insets(50, 12, 12, 12));
+
+                        BorderPane.setAlignment(bankerV, Pos.CENTER);
+                        BorderPane.setAlignment(userV, Pos.CENTER);
 
                         primaryStage.setScene(firstScene);
                     }
