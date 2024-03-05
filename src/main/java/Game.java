@@ -24,7 +24,7 @@ public class Game extends Application {
     private Button b1, b2, b3, b4,menu;
     private TextField t1, t2,t3;
     private VBox v1, v2,v3,v4;
-    private HBox h1;
+    private HBox h1,h2;
 
     private BlackjackGame game;
 
@@ -85,14 +85,14 @@ public class Game extends Application {
         title2.setFont(Font.font("Arial", 24));
         BorderPane.setAlignment(title2, Pos.CENTER);
         //testPublish image
-        h1 = new HBox();
-        Image cardImage = new Image("1Clubs.png");
-        ImageView imageView = new ImageView(cardImage);
-        imageView.setFitWidth(100); //
-        imageView.setFitHeight(150); //
-        h1.getChildren().add(imageView);
-        h1.setAlignment(Pos.CENTER);
-        border2.setCenter(h1);
+        //h1 = new HBox();
+        //Image cardImage = new Image("1Clubs.png");
+        //ImageView imageView = new ImageView(cardImage);
+        //imageView.setFitWidth(100); //
+        //imageView.setFitHeight(150); //
+        //h1.getChildren().add(imageView);
+        //h1.setAlignment(Pos.CENTER);
+        //border2.setCenter(h1);
         // endPublish image
         // menu code start
         menu = new Button("Return to Menu");
@@ -101,11 +101,13 @@ public class Game extends Application {
         v3.setAlignment(Pos.TOP_RIGHT);
         border2.setRight(v3);
         // menu end
-        v2 = new VBox(20, b2, b3, b4,t2,h1);
-        border2.setLeft(v2);
-        border2.setCenter(title2);
-        v2.setAlignment(Pos.BOTTOM_CENTER);
-        border2.setMargin(v2,new Insets(12,12,12,12));
+
+        //code moved to inside handle() below to generate image of user cards
+        //v2 = new VBox(20, b2, b3, b4,t2,h1);
+        //border2.setLeft(v2);
+        //border2.setCenter(title2);
+        //v2.setAlignment(Pos.BOTTOM_CENTER);
+        //border2.setMargin(v2,new Insets(12,12,12,12));
         //end of scene 2 code
         Scene scene2 = new Scene(border2,700,700);
         b1.setOnAction(new EventHandler<ActionEvent>() {
@@ -116,7 +118,42 @@ public class Game extends Application {
                     String inputText = t1.getText();
                     game.beginGame(Integer.parseInt(inputText));
                     game.getUserCards().get(0).printCard();
+                    //output card 1
+                    h1 = new HBox();
+                    int val = game.getUserCards().get(0).getValue();
+                    String suit = game.getUserCards().get(0).getSuit();
+                    String card1 = val+suit+".png";
+                    Image c1Image = new Image(card1);
+                    ImageView c1View = new ImageView(c1Image);
+                    c1View.setFitWidth(100); //
+                    c1View.setFitHeight(150); //
+                    h1.getChildren().add(c1View);
+                    h1.setAlignment(Pos.CENTER);
+                    border2.setCenter(h1);
+                    //end card1
+                    //start card2
                     game.getUserCards().get(1).printCard();
+                    h2 = new HBox();
+                    int val2 = game.getUserCards().get(1).getValue();
+                    String suit2 = game.getUserCards().get(1).getSuit();
+                    String card2 = val2+suit2+".png";
+                    Image c2Image = new Image(card2);
+                    ImageView c2View = new ImageView(c2Image);
+                    c2View.setFitWidth(100); //
+                    c2View.setFitHeight(150); //
+                    h2.getChildren().add(c2View);
+                    h2.setAlignment(Pos.CENTER);
+                    border2.setCenter(h2);
+                    //end card2
+
+                    v2 = new VBox(20, b2, b3, b4,t2,h1,h2);
+                    border2.setLeft(v2);
+                    border2.setCenter(title2);
+                    v2.setAlignment(Pos.BOTTOM_CENTER);
+                    border2.setMargin(v2,new Insets(12,12,12,12));
+
+
+                    //game.getUserCards().get(1).printCard();
                     primaryStage.setScene(scene2);
 
 
@@ -126,6 +163,9 @@ public class Game extends Application {
                 }
             }
         });
+
+
+
         //hit button event
         b2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
