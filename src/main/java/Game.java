@@ -17,7 +17,7 @@ import javafx.util.converter.IntegerStringConverter;
 
 
 public class Game extends Application {
-    private Button b1, b2, b3, b4;
+    private Button b1, b2, b3, b4, b6;
     private TextField t1, t2;
     private VBox v1, v2;
 
