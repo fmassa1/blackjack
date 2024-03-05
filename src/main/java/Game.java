@@ -10,6 +10,7 @@ import javafx.scene.image.ImageView;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.geometry.Pos;
@@ -23,6 +24,7 @@ public class Game extends Application {
     private Button b1, b2, b3, b4,b6;
     private TextField t1, t2;
     private VBox v1, v2;
+    private HBox h1;
 
     private BlackjackGame game;
 
@@ -83,9 +85,10 @@ public class Game extends Application {
         title2.setFont(Font.font("Arial", 24));
         BorderPane.setAlignment(title2, Pos.CENTER);
         //testPublish image
+        h1 = new HBox();
         Image cardImage = new Image("1Clubs.png");
         ImageView imageView = new ImageView(cardImage);
-        v2.getChildren().add(imageView);
+        h1.getChildren().add(imageView);
         // endPublish image
         v2 = new VBox(20, b2, b3, b4, t2);
         border2.setLeft(v2);
