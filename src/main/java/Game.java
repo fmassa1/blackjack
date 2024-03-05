@@ -219,6 +219,17 @@ public class Game extends Application {
                 raiseB.setText("");
                 t2.clear();
                 t2.setText("No more bets");
+                //when user card value > 21 then disable hit button & disable stand button & output "Bust, Banker Won"
+                int userTotal = 0;
+                for(Card c: userCards){
+                    userTotal+=c.getValue();
+                }
+                if(userTotal>21){
+                    hitB.setDisable(true);
+                    hitB.setText("");
+                    standB.setDisable(true);
+                    standB.setText("");
+                }
                 t2.setEditable(false);
             }
         });
@@ -251,6 +262,7 @@ public class Game extends Application {
                 hitB.setDisable(true);
                 standB.setText("");
                 hitB.setText("");
+
                 t2.clear();
                 t2.setText("No more bets");
                 t2.setEditable(false);
