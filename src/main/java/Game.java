@@ -248,7 +248,9 @@ public class Game extends Application {
                 //game.playerHit();
                 h2.getChildren().add(getCardImage(game.getBankerCards().get(0).getValue() + game.getBankerCards().get(1).getSuit() + ".png"));
                 standB.setDisable(true);
+                hitB.setDisable(true);
                 standB.setText("");
+                hitB.setText("");
                 t2.clear();
                 t2.setText("No more bets");
                 t2.setEditable(false);
