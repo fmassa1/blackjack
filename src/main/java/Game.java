@@ -210,6 +210,11 @@ public class Game extends Application {
             @Override
             public void handle(ActionEvent event) {
                 game.playerHit();
+                ArrayList<Card> userCards = game.getUserCards();
+                h1.getChildren().clear();
+                for (Card curCard : userCards) {
+                    h1.getChildren().add(getCardImage(curCard.getValue() + curCard.getSuit() + ".png"));
+                }
                 raiseB.setDisable(true);
                 raiseB.setText("");
                 t2.clear();
