@@ -21,8 +21,8 @@ import javafx.util.converter.IntegerStringConverter;
 
 
 public class Game extends Application {
-    private Button b1, b2, b3, b4,b6;
-    private TextField t1, t2;
+    private Button b1, b2, b3, b4,menu;
+    private TextField t1, t2,t3;
     private VBox v1, v2;
     private HBox h1;
 
@@ -90,7 +90,11 @@ public class Game extends Application {
         ImageView imageView = new ImageView(cardImage);
         h1.getChildren().add(imageView);
         // endPublish image
-        v2 = new VBox(20, b2, b3, b4, t2);
+        menu = new Button("Return to Menu");
+        menu.setPrefWidth(150);
+
+
+        v2 = new VBox(20, b2, b3, b4,menu,t2,h1);
         border2.setLeft(v2);
         border2.setCenter(title2);
         v2.setAlignment(Pos.BOTTOM_CENTER);
@@ -101,6 +105,7 @@ public class Game extends Application {
             @Override
             public void handle(ActionEvent event) {
                 try {
+
                     String inputText = t1.getText();
                     game.beginGame(Integer.parseInt(inputText));
                     game.getUserCards().get(0).printCard();
