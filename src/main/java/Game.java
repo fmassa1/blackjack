@@ -23,7 +23,7 @@ import javafx.util.converter.IntegerStringConverter;
 public class Game extends Application {
     private Button b1, b2, b3, b4,menu;
     private TextField t1, t2,t3;
-    private VBox v1, v2,v3;
+    private VBox v1, v2,v3,v4;
     private HBox h1;
 
     private BlackjackGame game;
@@ -91,6 +91,8 @@ public class Game extends Application {
         imageView.setFitWidth(100); //
         imageView.setFitHeight(150); //
         h1.getChildren().add(imageView);
+        h1.setAlignment(Pos.CENTER);
+        border2.setCenter(h1);
         // endPublish image
         // menu code start
         menu = new Button("Return to Menu");
