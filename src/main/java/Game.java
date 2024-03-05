@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 
 public class Game extends Application {
-    private Button b1, b2, b3, b4, menu;
+    private Button startB, hitB, standB, raiseB, menuB;
     private TextField t1, t2,t3;
     private VBox v1, v2, v3;
     private HBox h1,h2;
@@ -49,9 +49,9 @@ public class Game extends Application {
         border.setPadding(new Insets(12));
 
 
-        //start of scene 1 code
-        b1 = new Button("Start Game");
-        b1.setPrefWidth(150);
+        //start of StartScreen code
+        startB = new Button("Start Game");
+        startB.setPrefWidth(150);
 
         t1 = new TextField();
         t1.setPrefWidth(150);
@@ -65,45 +65,45 @@ public class Game extends Application {
         title.setFont(Font.font("Arial", 48));
         BorderPane.setAlignment(title, Pos.CENTER);
 
-        v1 = new VBox(20, b1, t1);
+        v1 = new VBox(20, startB, t1);
         border.setBottom(v1);
         border.setCenter(title);
         v1.setAlignment(Pos.CENTER);
         border.setMargin(v1, new Insets(12,12,250,12));
 
-        Scene scene = new Scene(border,700,700);
-        //end of scene 1 code
+        Scene startScreen = new Scene(border,700,700);
+        //end of StartScreen code
 
-        //start of scene2 code
+        //start of firstScene code
         BorderPane border2 = new BorderPane();
         border2.setPadding(new Insets(12));
 
-        b2 = new Button("Hit");
-        b3 = new Button("Stand");
-        b4 = new Button("Raise Bet");
-        b2.setPrefWidth(150);
-        b3.setPrefWidth(150);
-        b4.setPrefWidth(150);
+        hitB = new Button("Hit");
+        standB = new Button("Stand");
+        raiseB = new Button("Raise Bet");
+        hitB.setPrefWidth(150);
+        standB.setPrefWidth(150);
+        raiseB.setPrefWidth(150);
 
         t2 = new TextField();
         t2.setPromptText("enter raise amount");
         t2.setPrefWidth(150);
         t2.setAlignment(Pos.CENTER);
 
-        Text title2 = new Text();
-        title2.setText("Banker Hand");
-        title2.setFont(Font.font("Arial", 24));
-        BorderPane.setAlignment(title2, Pos.CENTER);
+        Text bankerLabel = new Text();
+        bankerLabel.setText("Banker Hand");
+        bankerLabel.setFont(Font.font("Arial", 24));
+        BorderPane.setAlignment(bankerLabel, Pos.CENTER);
 
-        menu = new Button("Return to Menu");
-        menu.setPrefWidth(150);
-        border2.setTop(menu);
-        border2.setCenter(title2);
-        menu.setAlignment((Pos.CENTER));
-        // menu end
+        menuB = new Button("Return to Menu");
+        menuB.setPrefWidth(150);
+        border2.setTop(menuB);
+        border2.setCenter(bankerLabel);
+        menuB.setAlignment((Pos.CENTER));
 
-        Scene scene2 = new Scene(border2,700,700);
-        b1.setOnAction(new EventHandler<ActionEvent>() {
+
+        Scene firstScene = new Scene(border2,700,700);
+        startB.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 try {
@@ -127,8 +127,8 @@ public class Game extends Application {
                     h1.setAlignment(Pos.CENTER);
                     h2.setAlignment(Pos.CENTER);
                     //end card2
-                    v2 = new VBox(20, b2, b3, b4,t2);
-                    v3 = new VBox(20, title2, h2);
+                    v2 = new VBox(20, hitB, standB, raiseB,t2);
+                    v3 = new VBox(20, bankerLabel, h2);
                     border2.setLeft(v2);
                     border2.setBottom(h1);
                     border2.setCenter(v3);
@@ -136,7 +136,7 @@ public class Game extends Application {
                     border2.setMargin(v2,new Insets(12,12,12,12));
                     border2.setMargin(v3,new Insets(12,12,12,12));
 
-                    primaryStage.setScene(scene2);
+                    primaryStage.setScene(firstScene);
 
 
                 } catch (NumberFormatException e) {
@@ -149,25 +149,25 @@ public class Game extends Application {
 
 
         //hit button event
-        b2.setOnAction(new EventHandler<ActionEvent>() {
+        hitB.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 game.playerHit();
-                b4.setDisable(true);
-                b4.setText("");
+                raiseB.setDisable(true);
+                raiseB.setText("");
                 t2.clear();
                 t2.setText("No more bets");
                 t2.setEditable(false);
             }
         });
         //raise button and text box event
-        b4.setOnAction(new EventHandler<ActionEvent>() {
+        raiseB.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 try {
                     String inputText = t2.getText();
                     game.setBet(Integer.parseInt(inputText) + game.getBet());
-                    b4.setDisable(true);
+                    raiseB.setDisable(true);
                     t2.clear();
                     t2.setText("Bet now $" + game.getBet());
                     t2.setEditable(false);
@@ -178,10 +178,10 @@ public class Game extends Application {
                 }
             }
         });
-        menu.setOnAction(new EventHandler<ActionEvent>() {
+        menuB.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                primaryStage.setScene(scene);
+                primaryStage.setScene(startScreen);
                 t1.clear();
                 System.out.println("Bet now $" + game.getBet());
             }
@@ -189,7 +189,7 @@ public class Game extends Application {
 
 
 
-        primaryStage.setScene(scene);
+        primaryStage.setScene(startScreen);
         primaryStage.show();
     }
 
