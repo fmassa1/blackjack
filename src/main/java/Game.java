@@ -59,7 +59,7 @@ public class Game extends Application {
         Scene scene = new Scene(border,700,700);
         //end of scene 1 code
 
-        //start of scene 2 code
+        //start of scene2 code
         BorderPane border2 = new BorderPane();
         border2.setPadding(new Insets(12));
 
