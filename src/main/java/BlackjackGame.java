@@ -15,6 +15,7 @@ public class BlackjackGame {
     //sets up the beginning of the game
     public void beginGame(double bet){
         setBet(bet);
+        BlackjackDealer theDealer = new BlackjackDealer();
         this.playerHand = theDealer.dealHand();
         this.bankerHand = theDealer.dealHand();
     }

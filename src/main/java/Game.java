@@ -92,9 +92,9 @@ public class Game extends Application {
             public void handle(ActionEvent event) {
                 try {
                     String inputText = t1.getText();
-                    int money = Integer.parseInt(inputText);
-                    game.setBet(money);
-                    System.out.println(game.getBet());
+                    game.beginGame(Integer.parseInt(inputText));
+                    game.getUserCards().get(0).printCard();
+                    game.getUserCards().get(1).printCard();
                     primaryStage.setScene(scene2);
 
 
