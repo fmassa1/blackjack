@@ -196,6 +196,14 @@ public class Game extends Application {
                 }
             }
         });
+        menu.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                primaryStage.setScene(scene);
+                t1.clear();
+                System.out.println("Bet now $" + game.getBet());
+            }
+        });
 
 
 
