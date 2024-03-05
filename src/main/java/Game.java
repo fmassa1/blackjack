@@ -4,6 +4,9 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+//Card Image
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -17,7 +20,7 @@ import javafx.util.converter.IntegerStringConverter;
 
 
 public class Game extends Application {
-    private Button b1, b2, b3, b4, b6;
+    private Button b1, b2, b3, b4,b6;
     private TextField t1, t2;
     private VBox v1, v2;
 
@@ -79,7 +82,11 @@ public class Game extends Application {
         title2.setText("Banker Hand");
         title2.setFont(Font.font("Arial", 24));
         BorderPane.setAlignment(title2, Pos.CENTER);
-
+        //testPublish image
+        Image cardImage = new Image("1Clubs.png");
+        ImageView imageView = new ImageView(cardImage);
+        v2.getChildren().add(imageView);
+        // endPublish image
         v2 = new VBox(20, b2, b3, b4, t2);
         border2.setLeft(v2);
         border2.setCenter(title2);
