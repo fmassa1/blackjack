@@ -235,6 +235,20 @@ public class Game extends Application {
                 }
             }
         });
+
+        //stand button event
+        standB.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                //game.playerHit();
+                h2.getChildren().add(getCardImage(game.getBankerCards().get(0).getValue() + game.getBankerCards().get(1).getSuit() + ".png"));
+                standB.setDisable(true);
+                standB.setText("");
+                t2.clear();
+                t2.setText("No more bets");
+                t2.setEditable(false);
+            }
+        });
         menuB.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
