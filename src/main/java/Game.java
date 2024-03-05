@@ -23,9 +23,9 @@ import java.util.ArrayList;
 
 
 public class Game extends Application {
-    private Button b1, b2, b3, b4,menu;
+    private Button b1, b2, b3, b4, menu;
     private TextField t1, t2,t3;
-    private VBox v1, v2;
+    private VBox v1, v2, v3;
     private HBox h1,h2;
 
     private BlackjackGame game;
@@ -110,26 +110,32 @@ public class Game extends Application {
                     String inputText = t1.getText();
                     game.beginGame(Integer.parseInt(inputText));
 
+                    //display user cards
                     ArrayList<Card> userCards = game.getUserCards();
-                    ArrayList<String> images = new ArrayList<>();
                     h1 = new HBox();
                     for(Card curCard : userCards) {
-                        ImageView curImage = getCardImage(curCard.getValue()+curCard.getSuit()+".png");
-                        h1.getChildren().add(curImage);
+                        h1.getChildren().add(getCardImage(curCard.getValue()+curCard.getSuit()+".png"));
                     }
+                    ArrayList<Card> bankerCards = game.getBankerCards();
+                    h2 = new HBox();
+                    h2.getChildren().add(getCardImage(game.getBankerCards().get(0).getValue() + game.getBankerCards().get(0).getSuit() + ".png"));
+                    h2.getChildren().add(getCardImage("blank.png"));
+
+
+
 
                     h1.setAlignment(Pos.CENTER);
+                    h2.setAlignment(Pos.CENTER);
                     //end card2
-
                     v2 = new VBox(20, b2, b3, b4,t2);
+                    v3 = new VBox(20, title2, h2);
                     border2.setLeft(v2);
-                    border2.setCenter(title2);
                     border2.setBottom(h1);
+                    border2.setCenter(v3);
                     v2.setAlignment(Pos.BOTTOM_CENTER);
                     border2.setMargin(v2,new Insets(12,12,12,12));
+                    border2.setMargin(v3,new Insets(12,12,12,12));
 
-
-                    //game.getUserCards().get(1).printCard();
                     primaryStage.setScene(scene2);
 
 
