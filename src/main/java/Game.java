@@ -88,6 +88,8 @@ public class Game extends Application {
         h1 = new HBox();
         Image cardImage = new Image("1Clubs.png");
         ImageView imageView = new ImageView(cardImage);
+        imageView.setFitWidth(100); //
+        imageView.setFitHeight(150); //
         h1.getChildren().add(imageView);
         // endPublish image
         menu = new Button("Return to Menu");
