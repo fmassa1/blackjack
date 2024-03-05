@@ -8,6 +8,11 @@ public class BlackjackGame {
     private double currentBet;
     private double totalWinnings;
 
+    public BlackjackGame () {
+        this.theDealer = new BlackjackDealer();
+        this.gameLogic = new BlackjackGameLogic();
+    }
+
     public double evaluateWinnings() {
         return 0.0;
     }
@@ -15,7 +20,7 @@ public class BlackjackGame {
     //sets up the beginning of the game
     public void beginGame(double bet){
         setBet(bet);
-        BlackjackDealer theDealer = new BlackjackDealer();
+
         this.playerHand = theDealer.dealHand();
         this.bankerHand = theDealer.dealHand();
     }

@@ -104,6 +104,36 @@ public class Game extends Application {
                 }
             }
         });
+        //hit button event
+        b2.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                game.playerHit();
+                b4.setDisable(true);
+                b4.setText("");
+                t2.clear();
+                t2.setText("No more bets");
+                t2.setEditable(false);
+            }
+        });
+        //raise button and text box event
+        b4.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    String inputText = t2.getText();
+                    game.setBet(Integer.parseInt(inputText) + game.getBet());
+                    b4.setDisable(true);
+                    t2.clear();
+                    t2.setText("Bet now $" + game.getBet());
+                    t2.setEditable(false);
+
+                } catch (NumberFormatException e) {
+                    t2.clear();
+                    t2.setPromptText("Error: enter a number");
+                }
+            }
+        });
 
 
 
