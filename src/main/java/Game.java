@@ -256,7 +256,24 @@ public class Game extends Application {
             @Override
             public void handle(ActionEvent event) {
                 //game.playerHit();
+                int bankerTotal= game.getBankerCards().get(0).getValue();
                 h2.getChildren().add(getCardImage(game.getBankerCards().get(1).getValue() + game.getBankerCards().get(1).getSuit() + ".png"));
+                bankerTotal = bankerTotal + game.getBankerCards().get(1).getValue();
+                if(bankerTotal + game.getBankerCards().get(2).getValue() <=21){
+                    h2.getChildren().add(getCardImage(game.getBankerCards().get(2).getValue() + game.getBankerCards().get(2).getSuit() + ".png"));
+                    bankerTotal = bankerTotal + game.getBankerCards().get(2).getValue();
+
+                }
+                if(bankerTotal + game.getBankerCards().get(3).getValue() <=21){
+                    h2.getChildren().add(getCardImage(game.getBankerCards().get(3).getValue() + game.getBankerCards().get(3).getSuit() + ".png"));
+                    bankerTotal = bankerTotal + game.getBankerCards().get(3).getValue();
+                }
+                if(bankerTotal + game.getBankerCards().get(4).getValue() <=21){
+                    h2.getChildren().add(getCardImage(game.getBankerCards().get(4).getValue() + game.getBankerCards().get(4).getSuit() + ".png"));
+                    bankerTotal = bankerTotal + game.getBankerCards().get(4).getValue();
+                }
+
+
 
                 standB.setDisable(true);
                 hitB.setDisable(true);
@@ -266,6 +283,21 @@ public class Game extends Application {
                 t2.clear();
                 t2.setText("No more bets");
                 t2.setEditable(false);
+
+                // bankerTotal = bankerTotal + game.getBankerCards().get(1).getValue();
+               /* if(bankerTotal + game.getBankerCards().get(2).getValue() <=21){
+                    h2.getChildren().add(getCardImage(game.getBankerCards().get(2).getValue() + game.getBankerCards().get(2).getSuit() + ".png"));
+                    bankerTotal = bankerTotal + game.getBankerCards().get(2).getValue();
+
+                }
+                if(bankerTotal + game.getBankerCards().get(3).getValue() <=21){
+                    h2.getChildren().add(getCardImage(game.getBankerCards().get(3).getValue() + game.getBankerCards().get(3).getSuit() + ".png"));
+                    bankerTotal = bankerTotal + game.getBankerCards().get(3).getValue();
+                }
+                if(bankerTotal + game.getBankerCards().get(4).getValue() <=21){
+                    h2.getChildren().add(getCardImage(game.getBankerCards().get(4).getValue() + game.getBankerCards().get(4).getSuit() + ".png"));
+                    bankerTotal = bankerTotal + game.getBankerCards().get(4).getValue();
+                }*/
             }
         });
         menuB.setOnAction(new EventHandler<ActionEvent>() {
