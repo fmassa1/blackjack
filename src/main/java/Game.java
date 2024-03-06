@@ -256,7 +256,8 @@ public class Game extends Application {
             @Override
             public void handle(ActionEvent event) {
                 //game.playerHit();
-                h2.getChildren().add(getCardImage(game.getBankerCards().get(0).getValue() + game.getBankerCards().get(1).getSuit() + ".png"));
+                h2.getChildren().add(getCardImage(game.getBankerCards().get(1).getValue() + game.getBankerCards().get(1).getSuit() + ".png"));
+
                 standB.setDisable(true);
                 hitB.setDisable(true);
                 standB.setText("");
