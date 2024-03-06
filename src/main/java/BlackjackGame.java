@@ -31,7 +31,9 @@ public class BlackjackGame {
             this.playerHand.add(theDealer.drawOne());
     }
 
-
+    public int getUserCardTotal(){
+        return gameLogic.handTotal(playerHand);
+    };
     public void setUserMoney(double money) {this.userMoney = money;}
     public double getUserMoney() {return userMoney;}
 

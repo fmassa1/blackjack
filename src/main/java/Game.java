@@ -223,11 +223,7 @@ public class Game extends Application {
                 t2.clear();
                 t2.setText("No more bets");
                 //when user card value > 21 then disable hit button & disable stand button & output "Bust, Banker Won"
-                int userTotal = 0;
-                for(Card c: userCards){
-                    userTotal+=c.getValue();
-                }
-                if(userTotal>21){
+                if(game.getUserCardTotal() > 21){
                     hitB.setDisable(true);
                     hitB.setText("");
                     standB.setDisable(true);
