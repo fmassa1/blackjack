@@ -95,7 +95,6 @@ public class Game extends Application {
         betV.setAlignment(Pos.CENTER);
         betBorder.setBottom(betV);
         betBorder.setCenter(betTitle);
-
         betBorder.setMargin(betV, new Insets(12,12,250,12));
 
         Scene betScreen = new Scene(betBorder,700,700);
@@ -133,6 +132,10 @@ public class Game extends Application {
         border2.setCenter(bankerLabel);
         menuB.setAlignment((Pos.CENTER));
 
+        //set background border (rough border)
+        betBorder.setStyle(("-fx-background-color: green;"));
+        border.setStyle(("-fx-background-color: green;"));
+        border2.setStyle(("-fx-background-color: green;"));
         Scene firstScene = new Scene(border2,700,700);
 
         startB.setOnAction(new EventHandler<ActionEvent>() {
