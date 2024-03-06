@@ -273,6 +273,13 @@ public class Game extends Application {
             public void handle(ActionEvent event) {
                 primaryStage.setScene(startScreen);
                 t1.clear();
+                standB.setDisable(false);
+                hitB.setDisable(false);
+                raiseB.setDisable(false);
+                t2.setEditable(true);
+                standB.setText("Stand");
+                hitB.setText("Hit");
+                raiseB.setText("Raise Bet");
                 System.out.println("Bet now $" + game.getBet());
             }
         });
