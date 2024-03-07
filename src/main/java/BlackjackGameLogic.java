@@ -35,10 +35,6 @@ public class BlackjackGameLogic {
         return total;
     }
     public boolean evaluateBankerDraw(ArrayList<Card> hand) {
-        int total = 0;
-        for (Card card : hand) {
-            total += card.getValue();
-        }
-        return total <= 16;
+        return handTotal(hand) <= 16;
     }
 }

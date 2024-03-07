@@ -28,7 +28,7 @@ public class BlackjackGame {
     public void playerHit() {this.playerHand.add(theDealer.drawOne());}
     public void bankerHit() {
         while (gameLogic.evaluateBankerDraw(bankerHand))
-            this.playerHand.add(theDealer.drawOne());
+            this.bankerHand.add(theDealer.drawOne());
     }
 
     public int getUserCardTotal(){
