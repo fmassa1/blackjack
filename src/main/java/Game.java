@@ -273,7 +273,9 @@ public class Game extends Application {
             public void handle(ActionEvent event) {
                 game.bankerHit();
                 h2.getChildren().clear();
+                int bankerTotal = 0;
                 for(Card curCard : game.getBankerCards()) {
+                    bankerTotal = bankerTotal + curCard.getValue();
                     h2.getChildren().add(getCardImage(curCard.getValue() + curCard.getSuit() + ".png"));
                 }
                 standB.setDisable(true);
@@ -284,6 +286,21 @@ public class Game extends Application {
                 t2.clear();
                 t2.setText("No more bets");
                 t2.setEditable(false);
+
+                if( bankerTotal> 21){
+                    hitB.setDisable(true);
+                    hitB.setText("");
+                    standB.setDisable(true);
+                    standB.setText("");
+                    //t4.setText("User Won: Banker Bust");
+                    //bankerBust.setFont(Font.font("Arial",48));
+                    //BorderPane.setAlignment(bankerBust, Pos.CENTER);
+                    //border2.setCenter(bankerBust);
+                    Text bankerBust = new Text("  ");
+                    bankerBust.setFont(Font.font("Arial",48));
+                    BorderPane.setAlignment(bankerBust, Pos.CENTER);
+                    border2.setCenter(bankerBust);
+                }
 
                 // bankerTotal = bankerTotal + game.getBankerCards().get(1).getValue();
                /* if(bankerTotal + game.getBankerCards().get(2).getValue() <=21){
