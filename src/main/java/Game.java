@@ -228,6 +228,10 @@ public class Game extends Application {
                     hitB.setText("");
                     standB.setDisable(true);
                     standB.setText("");
+                    Text bustText = new Text("Game Over: User Bust");
+                    bustText.setFont(Font.font("Arial",48));
+                    BorderPane.setAlignment(bustText, Pos.CENTER);
+                    border2.setCenter(bustText);
                 }
                 t2.setEditable(false);
             }
