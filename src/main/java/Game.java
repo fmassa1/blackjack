@@ -260,9 +260,13 @@ public class Game extends Application {
             @Override
             public void handle(ActionEvent event) {
                 //game.playerHit();
-                int bankerTotal= game.getBankerCards().get(0).getValue();
+
+                h2.getChildren().clear();
+                h2.getChildren().add(getCardImage(game.getBankerCards().get(0).getValue() + game.getBankerCards().get(0).getSuit() + ".png"));
                 h2.getChildren().add(getCardImage(game.getBankerCards().get(1).getValue() + game.getBankerCards().get(1).getSuit() + ".png"));
-                bankerTotal = bankerTotal + game.getBankerCards().get(1).getValue();
+                //h2.getChildren().add(getCardImage(game.getBankerCards().get(2).getValue() + game.getBankerCards().get(2).getSuit() + ".png"));
+
+                /*bankerTotal = bankerTotal + game.getBankerCards().get(1).getValue();
                 if(bankerTotal + game.getBankerCards().get(2).getValue() <=21){
                     h2.getChildren().add(getCardImage(game.getBankerCards().get(2).getValue() + game.getBankerCards().get(2).getSuit() + ".png"));
                     bankerTotal = bankerTotal + game.getBankerCards().get(2).getValue();
@@ -276,7 +280,7 @@ public class Game extends Application {
                     h2.getChildren().add(getCardImage(game.getBankerCards().get(4).getValue() + game.getBankerCards().get(4).getSuit() + ".png"));
                     bankerTotal = bankerTotal + game.getBankerCards().get(4).getValue();
                 }
-
+                */
 
 
                 standB.setDisable(true);
