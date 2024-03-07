@@ -28,6 +28,8 @@ public class Game extends Application {
     private VBox v1, v2, bankerV, userV, betV, mainV;
     private HBox h1,h2;
 
+    private Text money, curBet;
+
     private BlackjackGame game;
 
     public ImageView getCardImage(String curCard) {
@@ -144,6 +146,10 @@ public class Game extends Application {
                 try {
                     String inputText = t1.getText();
                     game.beginGame(Integer.parseInt(inputText));
+                    money = new Text();
+                    money.setText("Current Balance: $" + inputText);
+                    money.setFont(Font.font("Arial", 12));
+                    BorderPane.setAlignment(money, Pos.CENTER);
                     primaryStage.setScene(betScreen);
 
 
@@ -164,7 +170,12 @@ public class Game extends Application {
                         t3.clear();
                         t3.setPromptText("bet too big");
                     }
+
                     else {
+                        curBet = new Text();
+                        curBet.setText("Current Bet: $" + inputText);
+                        curBet.setFont(Font.font("Arial", 12));
+                        BorderPane.setAlignment(curBet, Pos.CENTER);
 
                         //display user cards
                         ArrayList<Card> userCards = game.getUserCards();
@@ -179,7 +190,7 @@ public class Game extends Application {
                         h1.setAlignment(Pos.CENTER);
                         h2.setAlignment(Pos.CENTER);
                         //end card2
-                        v2 = new VBox(20, hitB, standB, raiseB, t2);
+                        v2 = new VBox(20, hitB, standB, raiseB, t2, money, curBet);
                         v2.setAlignment(Pos.BOTTOM_CENTER);
 
                         bankerV = new VBox(20, bankerLabel, h2);
@@ -243,9 +254,10 @@ public class Game extends Application {
                 try {
                     String inputText = t2.getText();
                     game.setBet(Integer.parseInt(inputText) + game.getBet());
+                    curBet.setText("Current Bet: $" + game.getBet());
                     raiseB.setDisable(true);
                     t2.clear();
-                    t2.setText("Bet now $" + game.getBet());
+                    t2.setText("No more bets");
                     t2.setEditable(false);
 
                 } catch (NumberFormatException e) {
@@ -264,8 +276,6 @@ public class Game extends Application {
                 for(Card curCard : game.getBankerCards()) {
                     h2.getChildren().add(getCardImage(curCard.getValue() + curCard.getSuit() + ".png"));
                 }
-
-
                 standB.setDisable(true);
                 hitB.setDisable(true);
                 standB.setText("");
