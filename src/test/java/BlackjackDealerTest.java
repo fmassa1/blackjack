@@ -48,4 +48,11 @@ public class BlackjackDealerTest {
         assertEquals(2, hand.size());
     }
 
+    @Test
+    public void testDeckSizeafterMultiDraw() {
+        BlackjackDealer dealer = new BlackjackDealer();
+        dealer.drawOne();
+        dealer.dealHand();
+        assertEquals(49, dealer.deckSize());
+    }
 }
