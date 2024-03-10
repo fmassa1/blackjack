@@ -47,5 +47,10 @@ public class BlackjackGame {
     public String winner() {
         return gameLogic.whoWon(playerHand,bankerHand);
     }
+    public void shuffleChecker(){
+        if(theDealer.deckSize() < 26) {
+            theDealer.shuffleDeck();
+        }
+    }
 
 }

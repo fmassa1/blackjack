@@ -191,6 +191,7 @@ public class Game extends Application {
                         t3.setPromptText("bet too big");
                     }
                     else {
+                        game.shuffleChecker();
                         game.beginGame();
                         game.setBet(bet);
                         standB.setDisable(false);
