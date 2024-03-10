@@ -41,4 +41,11 @@ public class BlackjackDealerTest {
         assertNotEquals(dealer1.drawOne().toString(), dealer2.drawOne().toString());
     }
 
+    @Test
+    public void testHandDeal() {
+        BlackjackDealer dealer = new BlackjackDealer();
+        ArrayList<Card> hand = dealer.dealHand();
+        assertEquals(2, hand.size());
+    }
+
 }
