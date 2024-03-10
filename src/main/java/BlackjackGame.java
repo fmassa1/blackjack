@@ -37,7 +37,6 @@ public class BlackjackGame {
     };
     public void setUserMoney(double money) {this.userMoney = money;}
     public double getUserMoney() {return userMoney;}
-
     public void setBet(double bet) {this.currentBet = bet;}
     public double getBet() {
         return this.currentBet;

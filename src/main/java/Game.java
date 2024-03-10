@@ -158,10 +158,11 @@ public class Game extends Application {
                     String inputText = t1.getText();
                     game.setUserMoney(Integer.parseInt(inputText));
                     money = new Text();
-                    money.setText("Current Balance: $" + inputText);
+                    balance.setText("Current Balance: $" + game.getUserMoney());
+                    money.setText("Current Balance: $" + game.getUserMoney());
                     money.setFont(Font.font("Arial", 12));
                     BorderPane.setAlignment(money, Pos.CENTER);
-                    balance.setText("Current Balance: $" + inputText);
+
 
                     primaryStage.setScene(betScreen);
 
@@ -184,7 +185,7 @@ public class Game extends Application {
                     }
                     else {
                         game.beginGame();
-
+                        game.setBet(bet);
                         standB.setDisable(false);
                         hitB.setDisable(false);
                         raiseB.setDisable(false);
@@ -263,6 +264,7 @@ public class Game extends Application {
                     endHand.setVisible(true);
                     nextBet.setText("Place Next Bet");
                     gameStatus.setText("User Busted");
+                    game.setUserMoney(game.getUserMoney() - game.getBet());
                 }
                 t2.setEditable(false);
             }
@@ -310,6 +312,7 @@ public class Game extends Application {
             @Override
             public void handle(ActionEvent actionEvent) {
                 balance.setText("Current Balance: $" + game.getUserMoney());
+                money.setText("Current Balance: $" + game.getUserMoney());
                 primaryStage.setScene(betScreen);
 
             }
