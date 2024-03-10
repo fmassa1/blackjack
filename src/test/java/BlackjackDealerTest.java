@@ -23,4 +23,22 @@ public class BlackjackDealerTest {
         dealer.dealHand();
         assertEquals(dealer.deckSize(), 50);
     }
+
+    @Test
+    public void testDrawingAllCards() {
+        BlackjackDealer dealer = new BlackjackDealer();
+        for (int i = 0; i < 52; i++) {
+            assertNotNull(dealer.drawOne());
+        }
+        assertNull(dealer.drawOne());
+    }
+
+    @Test
+    public void testShuffleDeck() {
+        BlackjackDealer dealer1 = new BlackjackDealer();
+        BlackjackDealer dealer2 = new BlackjackDealer();
+        dealer2.shuffleDeck();
+        assertNotEquals(dealer1.drawOne().toString(), dealer2.drawOne().toString());
+    }
+
 }
