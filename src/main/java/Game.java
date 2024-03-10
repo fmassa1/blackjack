@@ -29,7 +29,7 @@ public class Game extends Application {
     private VBox v1, v2, bankerV, userV, betV, mainV, endHand;
     private HBox h1,h2;
 
-    private Text money, curBet, gameStatus, balance;
+    private Text money, curBet, gameStatus, winnings, balance, titleStatus;
 
     private BlackjackGame game;
 
@@ -65,14 +65,17 @@ public class Game extends Application {
 
         Text title = new Text();
         title.setText("Blackjack");
-        title.setFont(Font.font("Arial", 48));
+        title.setFont(Font.font("Arial", 64));
         BorderPane.setAlignment(title, Pos.CENTER);
 
-        v1 = new VBox(20, startB, t1);
-        border.setBottom(v1);
-        border.setCenter(title);
+        titleStatus = new Text("Try your luck!");
+        titleStatus.setFont(Font.font("Arial", 24));
+        BorderPane.setAlignment(titleStatus, Pos.CENTER);
+
+        v1 = new VBox(20, title, titleStatus, startB, t1);
+        border.setCenter(v1);
         v1.setAlignment(Pos.CENTER);
-        border.setMargin(v1, new Insets(12,12,250,12));
+        border.setMargin(v1, new Insets(12,12,12,12));
 
         Scene startScreen = new Scene(border,700,700);
         //end of StartScreen code
@@ -134,10 +137,13 @@ public class Game extends Application {
 
 
         gameStatus = new Text();
-        gameStatus.setFont(Font.font("Arial", 48));
+        gameStatus.setFont(Font.font("Arial", 32));
+        winnings = new Text();
+        gameStatus.setFont(Font.font("Arial", 16));
         nextBet = new Button("");
+        nextBet.setText("Place Next Bet");
         nextBet.setPrefWidth(150);
-        endHand = new VBox(10, gameStatus, nextBet);
+        endHand = new VBox(10, gameStatus, winnings, nextBet);
         endHand.setAlignment((Pos.CENTER));
 
         menuB = new Button("Return to Menu");
@@ -263,8 +269,8 @@ public class Game extends Application {
                     standB.setDisable(true);
                     standB.setText("");
                     endHand.setVisible(true);
-                    nextBet.setText("Place Next Bet");
                     gameStatus.setText("User Busted");
+                    winnings.setText("Lost $" + game.getBet());
                     game.setUserMoney(game.getUserMoney() - game.getBet());
                 }
                 t2.setEditable(false);
@@ -308,12 +314,18 @@ public class Game extends Application {
                 String winner = game.winner();
                 if(Objects.equals(winner, "dealer")) {
                     gameStatus.setText("Banker has won");
+                    winnings.setText("Lost $" + game.getBet());
+                    game.setUserMoney(game.getUserMoney() - game.getBet());
                 }
                 else if(Objects.equals(winner, "player")) {
                     gameStatus.setText("User has won!");
+                    winnings.setText("Gained $" + game.getBet());
+                    game.setUserMoney(game.getUserMoney() + game.getBet());
                 }
                 else {
                     gameStatus.setText("User and Banker Tied");
+                    winnings.setText("No change in balance");
+
                 }
                 endHand.setVisible(true);
             }
@@ -322,9 +334,16 @@ public class Game extends Application {
         nextBet.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                balance.setText("Current Balance: $" + game.getUserMoney());
-                money.setText("Current Balance: $" + game.getUserMoney());
-                primaryStage.setScene(betScreen);
+                if(game.getUserMoney() == 0) {
+                    primaryStage.setScene(startScreen);
+                    titleStatus.setText("Ran out of money. Try again");
+
+                }
+                else {
+                    balance.setText("Current Balance: $" + game.getUserMoney());
+                    money.setText("Current Balance: $" + game.getUserMoney());
+                    primaryStage.setScene(betScreen);
+                }
 
             }
         });
