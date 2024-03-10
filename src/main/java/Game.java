@@ -137,7 +137,6 @@ public class Game extends Application {
         nextBet = new Button("");
         nextBet.setPrefWidth(150);
         endHand = new VBox(10, gameStatus, nextBet);
-        endHand.setVisible(false);
         endHand.setAlignment((Pos.CENTER));
 
         menuB = new Button("Return to Menu");
@@ -157,12 +156,13 @@ public class Game extends Application {
             public void handle(ActionEvent actionEvent) {
                 try {
                     String inputText = t1.getText();
-                    game.beginGame(Integer.parseInt(inputText));
+                    game.setUserMoney(Integer.parseInt(inputText));
                     money = new Text();
                     money.setText("Current Balance: $" + inputText);
                     money.setFont(Font.font("Arial", 12));
                     BorderPane.setAlignment(money, Pos.CENTER);
-                    money.setText("Current Balance: $" + inputText);
+                    balance.setText("Current Balance: $" + inputText);
+
                     primaryStage.setScene(betScreen);
 
                 } catch (NumberFormatException e) {
@@ -177,11 +177,22 @@ public class Game extends Application {
                 try {
                     String inputText = t3.getText();
                     double bet = Integer.parseInt(inputText);
+                    endHand.setVisible(false);
                     if(bet > game.getUserMoney()) {
                         t3.clear();
                         t3.setPromptText("bet too big");
                     }
                     else {
+                        game.beginGame();
+
+                        standB.setDisable(false);
+                        hitB.setDisable(false);
+                        raiseB.setDisable(false);
+                        t2.setEditable(true);
+                        standB.setText("Stand");
+                        hitB.setText("Hit");
+                        raiseB.setText("Raise Bet");
+
                         curBet = new Text();
                         curBet.setText("Current Bet: $" + inputText);
                         curBet.setFont(Font.font("Arial", 12));
@@ -287,8 +298,6 @@ public class Game extends Application {
                 }
                 standB.setDisable(true);
                 hitB.setDisable(true);
-                standB.setText("");
-                hitB.setText("");
 
                 t2.clear();
                 t2.setText("No more bets");
@@ -300,7 +309,7 @@ public class Game extends Application {
         nextBet.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                money.setText("Current Balance: $" + game.getUserMoney());
+                balance.setText("Current Balance: $" + game.getUserMoney());
                 primaryStage.setScene(betScreen);
 
             }
@@ -310,14 +319,7 @@ public class Game extends Application {
             public void handle(ActionEvent event) {
                 primaryStage.setScene(startScreen);
                 t1.clear();
-                standB.setDisable(false);
-                hitB.setDisable(false);
-                raiseB.setDisable(false);
-                t2.setEditable(true);
-                standB.setText("Stand");
-                hitB.setText("Hit");
-                raiseB.setText("Raise Bet");
-                System.out.println("Bet now $" + game.getBet());
+
             }
         });
 

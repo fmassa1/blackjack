@@ -20,8 +20,9 @@ public class BlackjackGame {
     }
 
     //sets up the beginning of the game
-    public void beginGame(double bet){
-        setUserMoney(bet);
+    public void beginGame(){
+        this.playerHand = new ArrayList<>();
+        this.bankerHand = new ArrayList<>();
         this.playerHand = theDealer.dealHand();
         this.bankerHand = theDealer.dealHand();
     }
