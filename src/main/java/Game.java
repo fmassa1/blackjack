@@ -23,12 +23,12 @@ import java.util.ArrayList;
 
 
 public class Game extends Application {
-    private Button startB, hitB, standB, raiseB, menuB, betB;
+    private Button startB, hitB, standB, raiseB, menuB, betB, nextBet;
     private TextField t1, t2, t3;
-    private VBox v1, v2, bankerV, userV, betV, mainV;
+    private VBox v1, v2, bankerV, userV, betV, mainV, endHand;
     private HBox h1,h2;
 
-    private Text money, curBet;
+    private Text money, curBet, gameStatus, balance;
 
     private BlackjackGame game;
 
@@ -80,6 +80,9 @@ public class Game extends Application {
         BorderPane betBorder = new BorderPane();
         betBorder.setPadding(new Insets(12));
 
+        balance = new Text();
+        balance.setFont(Font.font("Arial", 24));
+
         betB = new Button("Begin");
         betB.setAlignment(Pos.CENTER);
         betB.setPrefWidth(150);
@@ -93,7 +96,7 @@ public class Game extends Application {
         t3.setPrefWidth(150);
         t3.setAlignment(Pos.CENTER);
 
-        betV = new VBox(20, betB, t3);
+        betV = new VBox(20, balance, betB, t3);
         betV.setAlignment(Pos.CENTER);
         betBorder.setBottom(betV);
         betBorder.setCenter(betTitle);
@@ -128,6 +131,15 @@ public class Game extends Application {
         userLabel.setFont(Font.font("Arial", 24));
         BorderPane.setAlignment(userLabel, Pos.CENTER);
 
+
+        gameStatus = new Text();
+        gameStatus.setFont(Font.font("Arial", 48));
+        nextBet = new Button("");
+        nextBet.setPrefWidth(150);
+        endHand = new VBox(10, gameStatus, nextBet);
+        endHand.setVisible(false);
+        endHand.setAlignment((Pos.CENTER));
+
         menuB = new Button("Return to Menu");
         menuB.setPrefWidth(150);
         border2.setTop(menuB);
@@ -150,9 +162,8 @@ public class Game extends Application {
                     money.setText("Current Balance: $" + inputText);
                     money.setFont(Font.font("Arial", 12));
                     BorderPane.setAlignment(money, Pos.CENTER);
+                    money.setText("Current Balance: $" + inputText);
                     primaryStage.setScene(betScreen);
-
-
 
                 } catch (NumberFormatException e) {
                     t1.clear();
@@ -170,7 +181,6 @@ public class Game extends Application {
                         t3.clear();
                         t3.setPromptText("bet too big");
                     }
-
                     else {
                         curBet = new Text();
                         curBet.setText("Current Bet: $" + inputText);
@@ -193,17 +203,17 @@ public class Game extends Application {
                         v2 = new VBox(20, hitB, standB, raiseB, t2, money, curBet);
                         v2.setAlignment(Pos.BOTTOM_CENTER);
 
-                        bankerV = new VBox(20, bankerLabel, h2);
+                        bankerV = new VBox(10, bankerLabel, h2);
                         bankerV.setAlignment(Pos.CENTER);
-                        userV = new VBox(20, h1, userLabel);
+                        userV = new VBox(10, h1, userLabel);
                         userV.setAlignment(Pos.CENTER);
 
-                        mainV = new VBox(150, bankerV, userV);
+                        mainV = new VBox(50, bankerV, endHand, userV);
 
                         border2.setLeft(v2);
                         border2.setCenter(mainV);
                         border2.setMargin(v2, new Insets(12, 12, 12, 12));
-                        border2.setMargin(mainV, new Insets(50, 12, 12, 12));
+                        border2.setMargin(mainV, new Insets(12, 12, 12, 12));
 
                         BorderPane.setAlignment(bankerV, Pos.CENTER);
                         BorderPane.setAlignment(userV, Pos.CENTER);
@@ -239,10 +249,9 @@ public class Game extends Application {
                     hitB.setText("");
                     standB.setDisable(true);
                     standB.setText("");
-                    Text bustText = new Text("Game Over: User Bust");
-                    bustText.setFont(Font.font("Arial",48));
-                    BorderPane.setAlignment(bustText, Pos.CENTER);
-                    border2.setCenter(bustText);
+                    endHand.setVisible(true);
+                    nextBet.setText("Place Next Bet");
+                    gameStatus.setText("User Busted");
                 }
                 t2.setEditable(false);
             }
@@ -273,9 +282,7 @@ public class Game extends Application {
             public void handle(ActionEvent event) {
                 game.bankerHit();
                 h2.getChildren().clear();
-                int bankerTotal = 0;
                 for(Card curCard : game.getBankerCards()) {
-                    bankerTotal = bankerTotal + curCard.getValue();
                     h2.getChildren().add(getCardImage(curCard.getValue() + curCard.getSuit() + ".png"));
                 }
                 standB.setDisable(true);
@@ -287,35 +294,15 @@ public class Game extends Application {
                 t2.setText("No more bets");
                 t2.setEditable(false);
 
-                if( bankerTotal> 21){
-                    hitB.setDisable(true);
-                    hitB.setText("");
-                    standB.setDisable(true);
-                    standB.setText("");
-                    //t4.setText("User Won: Banker Bust");
-                    //bankerBust.setFont(Font.font("Arial",48));
-                    //BorderPane.setAlignment(bankerBust, Pos.CENTER);
-                    //border2.setCenter(bankerBust);
-                    Text bankerBust = new Text("  ");
-                    bankerBust.setFont(Font.font("Arial",48));
-                    BorderPane.setAlignment(bankerBust, Pos.CENTER);
-                    border2.setCenter(bankerBust);
-                }
+            }
+        });
 
-                // bankerTotal = bankerTotal + game.getBankerCards().get(1).getValue();
-               /* if(bankerTotal + game.getBankerCards().get(2).getValue() <=21){
-                    h2.getChildren().add(getCardImage(game.getBankerCards().get(2).getValue() + game.getBankerCards().get(2).getSuit() + ".png"));
-                    bankerTotal = bankerTotal + game.getBankerCards().get(2).getValue();
+        nextBet.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                money.setText("Current Balance: $" + game.getUserMoney());
+                primaryStage.setScene(betScreen);
 
-                }
-                if(bankerTotal + game.getBankerCards().get(3).getValue() <=21){
-                    h2.getChildren().add(getCardImage(game.getBankerCards().get(3).getValue() + game.getBankerCards().get(3).getSuit() + ".png"));
-                    bankerTotal = bankerTotal + game.getBankerCards().get(3).getValue();
-                }
-                if(bankerTotal + game.getBankerCards().get(4).getValue() <=21){
-                    h2.getChildren().add(getCardImage(game.getBankerCards().get(4).getValue() + game.getBankerCards().get(4).getSuit() + ".png"));
-                    bankerTotal = bankerTotal + game.getBankerCards().get(4).getValue();
-                }*/
             }
         });
         menuB.setOnAction(new EventHandler<ActionEvent>() {

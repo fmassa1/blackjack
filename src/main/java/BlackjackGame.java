@@ -39,7 +39,7 @@ public class BlackjackGame {
 
     public void setBet(double bet) {this.currentBet = bet;}
     public double getBet() {
-        return currentBet;
+        return this.currentBet;
     }
     public ArrayList<Card> getUserCards() {return playerHand;}
     public ArrayList<Card> getBankerCards() {return bankerHand;}
