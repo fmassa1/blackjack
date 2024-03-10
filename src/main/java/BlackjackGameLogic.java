@@ -5,13 +5,13 @@ public class BlackjackGameLogic {
     public String whoWon(ArrayList <Card> playerHand1, ArrayList<Card> dealerHand) {
         int player = handTotal(playerHand1);
         int dealer = handTotal(dealerHand);
-        if (player > dealer) {
+        if(player == dealer) {
+            return "push";
+        }
+        if (player > dealer || dealer > 21) {
             return "player";
         }
-        if (player < dealer) {
-            return "dealer";
-        }
-        return "push";
+        return "dealer";
     }
     public int handTotal(ArrayList<Card> hand) {
         boolean aceFound = false;

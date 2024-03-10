@@ -20,6 +20,7 @@ import javafx.scene.text.Text;
 import javafx.util.converter.IntegerStringConverter;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 public class Game extends Application {
@@ -300,11 +301,21 @@ public class Game extends Application {
                 }
                 standB.setDisable(true);
                 hitB.setDisable(true);
-
                 t2.clear();
                 t2.setText("No more bets");
                 t2.setEditable(false);
 
+                String winner = game.winner();
+                if(Objects.equals(winner, "dealer")) {
+                    gameStatus.setText("Banker has won");
+                }
+                else if(Objects.equals(winner, "player")) {
+                    gameStatus.setText("User has won!");
+                }
+                else {
+                    gameStatus.setText("User and Banker Tied");
+                }
+                endHand.setVisible(true);
             }
         });
 

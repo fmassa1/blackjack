@@ -44,5 +44,8 @@ public class BlackjackGame {
     public ArrayList<Card> getUserCards() {return playerHand;}
     public ArrayList<Card> getBankerCards() {return bankerHand;}
 
+    public String winner() {
+        return gameLogic.whoWon(playerHand,bankerHand);
+    }
 
 }
