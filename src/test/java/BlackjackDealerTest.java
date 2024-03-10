@@ -55,4 +55,17 @@ public class BlackjackDealerTest {
         dealer.dealHand();
         assertEquals(49, dealer.deckSize());
     }
+
+    @Test
+    public void testGetSuit() {
+        Card card = new Card("Hearts", "A");
+        assertEquals("Hearts", card.getSuit());
+    }
+
+    @Test
+    public void testChangeSuit() {
+        Card card = new Card("Spades", "10");
+        card.setSuit("Hearts");
+        assertEquals("Hearts", card.getSuit());
+    }
 }
