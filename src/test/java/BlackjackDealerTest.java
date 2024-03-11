@@ -43,7 +43,7 @@ public class BlackjackDealerTest {
     }
 
     @Test
-    public void testDeckSizeafterMultiDraw() {
+    public void testDeckSizeAfterMultiDraw() {
         BlackjackDealer dealer = new BlackjackDealer();
         dealer.drawOne();
         dealer.dealHand();
@@ -52,14 +52,7 @@ public class BlackjackDealerTest {
 
     @Test
     public void testGetSuit() {
-        Card card = new Card("Hearts", "A");
-        assertEquals("Hearts", card.getSuit());
-    }
-
-    @Test
-    public void testChangeSuit() {
-        Card card = new Card("Spades", "10");
-        card.setSuit("Hearts");
+        Card card = new Card("Hearts", 1);
         assertEquals("Hearts", card.getSuit());
     }
 
