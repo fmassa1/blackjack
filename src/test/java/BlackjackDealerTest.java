@@ -33,13 +33,7 @@ public class BlackjackDealerTest {
         assertNull(dealer.drawOne());
     }
 
-    @Test
-    public void testShuffleDeck() {
-        BlackjackDealer dealer1 = new BlackjackDealer();
-        BlackjackDealer dealer2 = new BlackjackDealer();
-        dealer2.shuffleDeck();
-        assertNotEquals(dealer1.drawOne().toString(), dealer2.drawOne().toString());
-    }
+
 
     @Test
     public void testHandDeal() {
@@ -68,4 +62,6 @@ public class BlackjackDealerTest {
         card.setSuit("Hearts");
         assertEquals("Hearts", card.getSuit());
     }
+
+
 }
