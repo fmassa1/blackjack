@@ -168,6 +168,15 @@ public class BlackjackDealerTest {
         assertTrue(game.hitB.isDisabled());
     }
 
-
+    @Test
+    public void testStandandRaiseBDisable() {
+        // Arrange
+        Game game = new Game();
+        game.raiseB.setDisable(false);
+        game.standB.setDisable(false);
+        game.standB.fire();
+        assertTrue(game.standB.isDisabled());
+        assertTrue(game.raiseB.isDisabled());
+    }
 
 }
