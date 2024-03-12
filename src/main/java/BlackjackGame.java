@@ -14,6 +14,16 @@ public class BlackjackGame {
         this.theDealer = new BlackjackDealer();
         this.gameLogic = new BlackjackGameLogic();
     }
+    //checks if a hand has a blackjack
+    public boolean blackJackChecker(ArrayList<Card> cards) {
+        if(cards.get(0).getValue() == 1 && (cards.get(1).getValue() == 11 || cards.get(1).getValue() == 12 || cards.get(1).getValue() == 13)) {
+            return true;
+        }
+        if(cards.get(1).getValue() == 1 && (cards.get(0).getValue() == 11 || cards.get(0).getValue() == 12 || cards.get(0).getValue() == 13)) {
+            return true;
+        }
+        return false;
+    }
 
     public double evaluateWinnings() {
         return 0.0;
