@@ -254,6 +254,9 @@ public class Game extends Application {
                         BorderPane.setAlignment(userV, Pos.CENTER);
 
                         primaryStage.setScene(firstScene);
+                        if(game.blackJackChecker(game.getBankerCards())) {
+                            startB.fire();
+                        }
                     }
 
 
@@ -339,20 +342,34 @@ public class Game extends Application {
                 t2.setEditable(false);
 
                 String winner = game.winner();
-                if(Objects.equals(winner, "dealer")) {
+                double winMoney = game.evaluateWinnings();
+                if(game.blackJackChecker(game.getBankerCards()) && game.blackJackChecker(game.getUserCards())) {
+                    gameStatus.setText("Banker and User have Blackjack");
+                    winnings.setText("No change in balance");
+                }
+                else if(game.blackJackChecker(game.getBankerCards())) {
+                    gameStatus.setText("Banker has Blackjack");
+                    winnings.setText("Lost $" + game.getBet());
+                }
+                else if(game.blackJackChecker(game.getBankerCards())) {
+                    gameStatus.setText("User has Blackjack");
+                    winnings.setText("Gained $" + winMoney);
+                }
+                else if(Objects.equals(winner, "dealer")) {
                     gameStatus.setText("Banker has won");
                     winnings.setText("Lost $" + game.getBet());
                 }
                 else if(Objects.equals(winner, "player")) {
                     gameStatus.setText("User has won!");
                     winnings.setText("Gained $" + game.getBet());
-                    game.setUserMoney(game.getUserMoney() + (game.getBet()*2));
+                    //game.setUserMoney(game.getUserMoney() + (game.getBet()*2));
                 }
                 else {
                     gameStatus.setText("User and Banker Tied");
                     winnings.setText("No change in balance");
-                    game.setUserMoney(game.getUserMoney() + game.getBet());
+                    //game.setUserMoney(game.getUserMoney() + game.getBet());
                 }
+                game.setUserMoney(game.getUserMoney() + winMoney);
                 endHand.setVisible(true);
             }
         });

@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Objects;
+
 public class BlackjackGame {
     private ArrayList<Card> playerHand;
     private ArrayList<Card> bankerHand;
@@ -16,17 +18,32 @@ public class BlackjackGame {
     }
     //checks if a hand has a blackjack
     public boolean blackJackChecker(ArrayList<Card> cards) {
-        if(cards.get(0).getValue() == 1 && (cards.get(1).getValue() == 11 || cards.get(1).getValue() == 12 || cards.get(1).getValue() == 13)) {
+        if(cards.size() != 2) {
+            return false;
+        }
+        if(cards.get(0).getValue() == 1 && (cards.get(1).getValue() == 10 || cards.get(1).getValue() == 11 || cards.get(1).getValue() == 12 || cards.get(1).getValue() == 13)) {
             return true;
         }
-        if(cards.get(1).getValue() == 1 && (cards.get(0).getValue() == 11 || cards.get(0).getValue() == 12 || cards.get(0).getValue() == 13)) {
+        if(cards.get(1).getValue() == 1 && (cards.get(0).getValue() == 10 || cards.get(0).getValue() == 11 || cards.get(0).getValue() == 12 || cards.get(0).getValue() == 13)) {
             return true;
         }
         return false;
     }
 
     public double evaluateWinnings() {
-        return 0.0;
+        if((blackJackChecker(playerHand) && blackJackChecker(bankerHand))) {
+            return totalWinnings/2;
+        }
+        if(blackJackChecker(bankerHand) || Objects.equals(winner(), "dealer")) {
+            return 0.0;
+        }
+        if(blackJackChecker(playerHand)) {
+            return 1.5 * totalWinnings;
+        }
+        if(Objects.equals(winner(), "push")) {
+            return totalWinnings/2;
+        }
+        return totalWinnings;
     }
 
     //sets up the beginning of the game
@@ -47,7 +64,10 @@ public class BlackjackGame {
     };
     public void setUserMoney(double money) {this.userMoney = money;}
     public double getUserMoney() {return userMoney;}
-    public void setBet(double bet) {this.currentBet = bet;}
+    public void setBet(double bet) {
+        this.currentBet = bet;
+        this.totalWinnings = bet * 2;
+    }
     public double getBet() {
         return this.currentBet;
     }
