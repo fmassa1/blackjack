@@ -163,15 +163,23 @@ public class Game extends Application {
             public void handle(ActionEvent actionEvent) {
                 try {
                     String inputText = t1.getText();
-                    game.setUserMoney(Integer.parseInt(inputText));
-                    money = new Text();
-                    balance.setText("Current Balance: $" + game.getUserMoney());
-                    money.setText("Current Balance: $" + game.getUserMoney());
-                    money.setFont(Font.font("Arial", 12));
-                    BorderPane.setAlignment(money, Pos.CENTER);
+                    double uMoney = Double.parseDouble(inputText);
+                    if(uMoney <= 0) {
+                        t1.clear();
+                        t1.setPromptText("Balance too small!");
+                    }
+                    else {
+                        t1.setPromptText("enter starting of money");
+                        game.setUserMoney(Math.round(uMoney * 100.0) / 100.0);
+                        money = new Text();
+                        balance.setText("Current Balance: $" + game.getUserMoney());
+                        money.setText("Current Balance: $" + game.getUserMoney());
+                        money.setFont(Font.font("Arial", 12));
+                        BorderPane.setAlignment(money, Pos.CENTER);
 
 
-                    primaryStage.setScene(betScreen);
+                        primaryStage.setScene(betScreen);
+                    }
 
                 } catch (NumberFormatException e) {
                     t1.clear();
@@ -184,16 +192,21 @@ public class Game extends Application {
             public void handle(ActionEvent event) {
                 try {
                     String inputText = t3.getText();
-                    double bet = Integer.parseInt(inputText);
+                    double bet = Double.parseDouble(inputText);
                     endHand.setVisible(false);
                     if(bet > game.getUserMoney()) {
                         t3.clear();
                         t3.setPromptText("bet too big");
                     }
+                    else if (bet <= 0) {
+                        t3.clear();
+                        t3.setPromptText("bet too small");
+                    }
                     else {
+                        t3.setPromptText("enter bet amount");
                         game.shuffleChecker();
                         game.beginGame();
-                        game.setBet(bet);
+                        game.setBet(Math.round(bet * 100.0) / 100.0);
                         standB.setDisable(false);
                         hitB.setDisable(false);
                         raiseB.setDisable(false);
@@ -203,7 +216,7 @@ public class Game extends Application {
                         raiseB.setText("Raise Bet");
 
                         curBet = new Text();
-                        curBet.setText("Current Bet: $" + inputText);
+                        curBet.setText("Current Bet: $" + game.getBet());
                         curBet.setFont(Font.font("Arial", 12));
                         BorderPane.setAlignment(curBet, Pos.CENTER);
 
@@ -283,7 +296,7 @@ public class Game extends Application {
             public void handle(ActionEvent event) {
                 try {
                     String inputText = t2.getText();
-                    game.setBet(Integer.parseInt(inputText) + game.getBet());
+                    game.setBet(Double.parseDouble(inputText) + game.getBet());
                     curBet.setText("Current Bet: $" + game.getBet());
                     raiseB.setDisable(true);
                     t2.clear();
@@ -335,6 +348,8 @@ public class Game extends Application {
         nextBet.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                t1.clear();
+                t3.clear();
                 if(game.getUserMoney() == 0) {
                     primaryStage.setScene(startScreen);
                     titleStatus.setText("Ran out of money. Try again");
@@ -353,7 +368,7 @@ public class Game extends Application {
             public void handle(ActionEvent event) {
                 primaryStage.setScene(startScreen);
                 t1.clear();
-
+                t3.clear();
             }
         });
 
