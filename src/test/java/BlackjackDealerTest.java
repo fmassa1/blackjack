@@ -97,6 +97,29 @@ public class BlackjackDealerTest {
         assertEquals("player", game.winner());
     }
 
+    @Test
+    public void testBankerWin() {
+        BlackjackGame game = new BlackjackGame();
+        game.setUserMoney(1000);
+        game.beginGame();
+        while (game.getBankerCardTotal() < 17) {
+            game.bankerHit();
+        }
+        assertEquals("dealer", game.winner());
+    }
+
+    @Test
+    public void testUserwin() {
+        BlackjackGame game = new BlackjackGame();
+        game.setUserMoney(1000);
+        game.beginGame();
+        while (game.getUserCardTotal < 17) {
+            game.userHit();
+        }
+        assertEquals("player", game.winner());
+    }
+
+
 
 
 
