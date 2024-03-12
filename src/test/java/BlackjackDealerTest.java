@@ -25,6 +25,20 @@ public class BlackjackDealerTest {
     }
 
     @Test
+    public void testHandTotal() {
+
+        BlackjackGameLogic logic = new BlackjackGameLogic();
+        ArrayList<Card> hand = new ArrayList<>();
+        hand.add(new Card("Hearts", 10));
+        hand.add(new Card("Diamonds", 5));
+
+
+        int total = logic.handTotal(hand);
+
+        assertEquals(15, total);
+    }
+
+    @Test
     public void testDrawingAllCards() {
         BlackjackDealer dealer = new BlackjackDealer();
         for (int i = 0; i < 52; i++) {
@@ -145,6 +159,15 @@ public class BlackjackDealerTest {
     }
 
     @Test
+    public void testSetandGetBet() {
+
+        Game game = new Game();
+        game.setBet(50);
+        //tests setBet by utilizeing getBet to retrieve bet
+        assertEquals(50, game.getBet());
+    }
+
+    @Test
     public void testRaiseExceedsUserMoney() {
         // Arrange
         Game game = new Game();
@@ -178,5 +201,7 @@ public class BlackjackDealerTest {
         assertTrue(game.standB.isDisabled());
         assertTrue(game.raiseB.isDisabled());
     }
+
+
 
 }
