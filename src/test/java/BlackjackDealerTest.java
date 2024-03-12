@@ -119,6 +119,18 @@ public class BlackjackDealerTest {
         assertEquals("player", game.winner());
     }
 
+    @Test
+    public void testRaiseBet() {
+
+        Game game = new Game();
+        game.setUserMoney(100); // Set initial user money
+        double initialBet = 10;
+        game.setBet(initialBet);
+        game.raiseB.setOnAction(event -> game.t2.setText("30")); //raises bet by 30
+        //sees if current bet has been raised successful
+        assertEquals(initialBet + 30, game.getBet());
+    }
+
 
 
 
