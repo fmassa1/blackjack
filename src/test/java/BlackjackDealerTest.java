@@ -56,5 +56,14 @@ public class BlackjackDealerTest {
         assertEquals("Hearts", card.getSuit());
     }
 
+    @Test
+    public void testBankerHits() {
+        BlackjackGame game = new BlackjackGame();
+        game.beginGame();
+        int initialSize = game.getBankerCards().size();
+        game.bankerHit();
+        assertEquals(initialSize + 1, game.getBankerCards().size());
+    }
+
 
 }
