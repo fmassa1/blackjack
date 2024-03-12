@@ -157,6 +157,16 @@ public class BlackjackDealerTest {
         assertEquals(initialBet, game.getBet());
     }
 
+    @Test
+    public void testStandBDisable() {
+        // Arrange
+        Game game = new Game();
+        game.hitB.setDisable(false);
+        //clicks StandB
+        game.standB.fire(); // Simulate clicking the stand button
+        //sees if it is disabled after click
+        assertTrue(game.hitB.isDisabled());
+    }
 
 
 
