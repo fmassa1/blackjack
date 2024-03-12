@@ -202,6 +202,41 @@ public class BlackjackDealerTest {
         assertTrue(game.raiseB.isDisabled());
     }
 
+    @Test
+    public void testGetValue() {
+
+        Card card = new Card("Diamonds", 9);
+
+        int value = card.getValue();
+        //sees if equal to value of card
+        assertEquals(9, value);
+    }
+
+    @Test
+    public void testGetValueMultiCard() {
+
+        Card card1 = new Card("Diamonds", 2);
+        Card card2 = new Card("Diamonds", 3);
+
+        int value1 = card1.getValue();
+        int value2 = card2.getValue();
+
+        assertEquals(2, value1);
+        assertEquals(3, value2);
+    }
+
+    @Test
+    public void testGetSuitMultiCards() {
+
+        Card card1 = new Card("Clubs", 2);
+        Card card2 = new Card("Diamonds", 3);
+
+        String suit1 = card1.getSuit();
+        String suit2 = card2.getSuit();
+
+        assertEquals("Clubs", suit1);
+        assertEquals("Diamonds", suit2);
+    }
 
 
 }
