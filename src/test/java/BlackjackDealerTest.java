@@ -131,6 +131,19 @@ public class BlackjackDealerTest {
         assertEquals(initialBet + 30, game.getBet());
     }
 
+    @Test
+    public void testRaiseInvalid() {
+        // Arrange
+        Game game = new Game();
+        game.setUserMoney(1000);
+        double initialBet = 100;
+        game.setBet(initialBet);
+
+        game.raiseB.setOnAction(event -> game.t2.setText("spam")); // invalid input
+        //checks if equal to inital bet and not added invalid input to bet pot
+        assertEquals(initialBet, game.getBet());
+    }
+
 
 
 
