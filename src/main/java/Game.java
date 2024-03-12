@@ -297,13 +297,25 @@ public class Game extends Application {
             public void handle(ActionEvent event) {
                 try {
                     String inputText = t2.getText();
-                    game.setBet(Double.parseDouble(inputText) + game.getBet());
-                    curBet.setText("Current Bet: $" + game.getBet());
-                    raiseB.setDisable(true);
-                    t2.clear();
-                    t2.setText("No more bets");
-                    t2.setEditable(false);
-
+                    double raiseAmount = Double.parseDouble(inputText);
+                    if(raiseAmount > game.getUserMoney()) {
+                        t2.clear();
+                        t2.setPromptText("Bet too big!");
+                    }
+                    else if(raiseAmount <= 0) {
+                        t2.clear();
+                        t2.setPromptText("Bet too small!");
+                    }
+                    else {
+                        game.setBet(game.getBet()+raiseAmount);
+                        game.setUserMoney(game.getUserMoney()-raiseAmount);
+                        money.setText("Current Balance: $" + game.getUserMoney());
+                        curBet.setText("Current Bet: $" + game.getBet());
+                        raiseB.setDisable(true);
+                        t2.clear();
+                        t2.setText("No more bets");
+                        t2.setEditable(false);
+                    }
                 } catch (NumberFormatException e) {
                     t2.clear();
                     t2.setPromptText("Error: enter a number");
@@ -339,7 +351,7 @@ public class Game extends Application {
                 else {
                     gameStatus.setText("User and Banker Tied");
                     winnings.setText("No change in balance");
-
+                    game.setUserMoney(game.getUserMoney() + game.getBet());
                 }
                 endHand.setVisible(true);
             }
