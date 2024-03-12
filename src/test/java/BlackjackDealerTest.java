@@ -65,5 +65,39 @@ public class BlackjackDealerTest {
         assertEquals(initialSize + 1, game.getBankerCards().size());
     }
 
+    @Test
+    public void testUserBust() {
+        //app start
+        BlackjackGame game = new BlackjackGame();
+        //money set
+        game.setUserMoney(100);
+        //game start
+        game.beginGame();
+        while (game.getUserCardTotal() < 21) {
+            game.playerHit();
+        }
+        game.playerHit();
+        //checks if winner string is dealer
+        assertEquals("dealer", game.winner());
+    }
+
+    @Test
+    public void testBankerBust() {
+        //app start
+        BlackjackGame game = new BlackjackGame();
+        //money set
+        game.setUserMoney(100);
+        //game start
+        game.beginGame();
+        while (game.getBankerCards() < 21) {
+            game.bankerHit;
+        }
+        game.bankerHit();
+        //checks if winner string is player
+        assertEquals("player", game.winner());
+    }
+
+
+
 
 }
