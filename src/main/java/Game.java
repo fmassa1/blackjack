@@ -173,7 +173,7 @@ public class Game extends Application {
                         game.setUserMoney(Math.round(uMoney * 100.0) / 100.0);
                         money = new Text();
                         balance.setText("Current Balance: $" + game.getUserMoney());
-                        money.setText("Current Balance: $" + game.getUserMoney());
+                        //money.setText("Current Balance: $" + game.getUserMoney());
                         money.setFont(Font.font("Arial", 12));
                         BorderPane.setAlignment(money, Pos.CENTER);
 
@@ -207,6 +207,7 @@ public class Game extends Application {
                         game.shuffleChecker();
                         game.beginGame();
                         game.setBet(Math.round(bet * 100.0) / 100.0);
+                        game.setUserMoney(game.getUserMoney() - game.getBet());
                         standB.setDisable(false);
                         hitB.setDisable(false);
                         raiseB.setDisable(false);
@@ -217,6 +218,7 @@ public class Game extends Application {
 
                         curBet = new Text();
                         curBet.setText("Current Bet: $" + game.getBet());
+                        money.setText("Current Balance: $" + game.getUserMoney());
                         curBet.setFont(Font.font("Arial", 12));
                         BorderPane.setAlignment(curBet, Pos.CENTER);
 
@@ -285,7 +287,6 @@ public class Game extends Application {
                     endHand.setVisible(true);
                     gameStatus.setText("User Busted");
                     winnings.setText("Lost $" + game.getBet());
-                    game.setUserMoney(game.getUserMoney() - game.getBet());
                 }
                 t2.setEditable(false);
             }
@@ -329,12 +330,11 @@ public class Game extends Application {
                 if(Objects.equals(winner, "dealer")) {
                     gameStatus.setText("Banker has won");
                     winnings.setText("Lost $" + game.getBet());
-                    game.setUserMoney(game.getUserMoney() - game.getBet());
                 }
                 else if(Objects.equals(winner, "player")) {
                     gameStatus.setText("User has won!");
                     winnings.setText("Gained $" + game.getBet());
-                    game.setUserMoney(game.getUserMoney() + game.getBet());
+                    game.setUserMoney(game.getUserMoney() + (game.getBet()*2));
                 }
                 else {
                     gameStatus.setText("User and Banker Tied");
