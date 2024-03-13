@@ -11,7 +11,4 @@ public class Card {
     public int getValue(){
         return this.value;
     }
-    public void printCard(){
-        System.out.println("Suit: " + suit + " Value: " + value);
-    }
 }
