@@ -255,7 +255,7 @@ public class Game extends Application {
 
                         primaryStage.setScene(firstScene);
                         if(game.blackJackChecker(game.getBankerCards())) {
-                            startB.fire();
+                            standB.fire();
                         }
                     }
 

@@ -15,6 +15,7 @@ public class BlackjackGameLogic {
     }
     public int handTotal(ArrayList<Card> hand) {
         boolean aceFound = false;
+        int numAce = 0;
         int total = 0;
         for (Card card : hand) {
             //if face card sets value to 10
@@ -25,13 +26,19 @@ public class BlackjackGameLogic {
             else if(card.getValue() == 1) {
                 total += 11;
                 aceFound = true;
+                numAce += 1;
             }
             else {
                 total += card.getValue();
             }
         }
         //if ace in hand and goes over 21 ace turns into a 1
-        if(aceFound && total > 21){total -= 10;}
+        if(aceFound && total > 21){
+            while(total > 21 && numAce != 0) {
+                total -= 10;
+                numAce -= 1;
+            }
+        }
         return total;
     }
     public boolean evaluateBankerDraw(ArrayList<Card> hand) {
