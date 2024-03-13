@@ -96,4 +96,7 @@ public class BlackjackGame {
         bankerHand.add(c1);
         bankerHand.add(c2);
     }
+    public int deckSize() {
+        return theDealer.deckSize();
+    }
 }

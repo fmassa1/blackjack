@@ -24,6 +24,7 @@ public class BlackjackGameLogicTest {
         player.add((new Card("Hearts", 10)));
         assertEquals(logic.handTotal(player), 14);
     }
+    @Test
     public void handTotalBlackJack() {
         player = new ArrayList<>();
         player.add((new Card("Hearts", 1)));

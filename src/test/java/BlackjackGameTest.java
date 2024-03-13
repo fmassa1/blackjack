@@ -119,4 +119,34 @@ public class BlackjackGameTest {
         game.playerHit();
         assertEquals(game.getUserCards().size(), 5);
     }
+    @Test
+    public void bankerHitBelow16() {
+        game.beginGame();
+        game.setBankerHand(H10, H5);
+        game.bankerHit();
+        assertEquals(game.getBankerCards().size(), 3);
+    }
+    @Test
+    public void bankerHitOver16() {
+        game.beginGame();
+        game.setBankerHand(H1, H10);
+        game.bankerHit();
+        assertEquals(game.getBankerCards().size(), 2);
+    }
+    @Test
+    public void shuffleCheckDeckMissing4Cards() {
+        game.beginGame();
+        game.shuffleChecker();
+        assertEquals(game.deckSize(), 48);
+    }
+    @Test
+    public void shuffleCheckDeckLotsOfCardsMissing() {
+        game.beginGame();
+        for(int i = 0; i < 32; i++) {
+            game.playerHit();
+        }
+        game.shuffleChecker();
+        assertEquals(game.deckSize(), 52);
+    }
+
 }
