@@ -92,4 +92,31 @@ public class BlackjackGameTest {
         game.setBankerHand(H10, H10);
         assertEquals(game.evaluateWinnings(), 3.0);
     }
+    @Test
+    public void evalWinningsBothBlackjack(){
+        game.setBet(1.0);
+        game.setPlayerHand(H1, H10);
+        game.setBankerHand(H1, HK);
+        assertEquals(game.evaluateWinnings(), 1.0);
+    }
+    @Test
+    public void beginGameTest() {
+        game.beginGame();
+        assertEquals(game.getBankerCards().size(), 2);
+        assertEquals(game.getUserCards().size(), 2);
+    }
+    @Test
+    public void userHitOnce() {
+        game.beginGame();
+        game.playerHit();
+        assertEquals(game.getUserCards().size(), 3);
+    }
+    @Test
+    public void userHitMultiple() {
+        game.beginGame();
+        game.playerHit();
+        game.playerHit();
+        game.playerHit();
+        assertEquals(game.getUserCards().size(), 5);
+    }
 }
