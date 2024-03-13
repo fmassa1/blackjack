@@ -83,4 +83,17 @@ public class BlackjackGame {
         }
     }
 
+    //
+    //these are used only for testing
+    //
+    public void setPlayerHand(Card c1, Card c2){
+        playerHand = new ArrayList<>();
+        playerHand.add(c1);
+        playerHand.add(c2);
+    }
+    public void setBankerHand(Card c1, Card c2){
+        bankerHand = new ArrayList<>();
+        bankerHand.add(c1);
+        bankerHand.add(c2);
+    }
 }
