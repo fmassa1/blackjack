@@ -55,7 +55,7 @@ public class Game extends Application {
         //start of StartScreen code
         startB = new Button("Start Game");
         startB.setPrefWidth(150);
-
+// rules scene
         rules = new Button("Rules");
         rules.setPrefWidth(150);
         BorderPane rulesBorder = new BorderPane();
@@ -63,9 +63,11 @@ public class Game extends Application {
         rulesText.setText("Blackjack Rules:");
         rulesText.setFont(Font.font("Arial", 64));
         BorderPane.setAlignment(rulesText, Pos.CENTER);
+
         Scene rulesScreen = new Scene(rulesBorder,1200,700);
 
 
+// end rules scene
         t1 = new TextField();
         t1.setPrefWidth(150);
         t1.setPromptText("enter starting of money");
@@ -166,12 +168,18 @@ public class Game extends Application {
         betBorder.setStyle(("-fx-background-color: green;"));
         border.setStyle(("-fx-background-color: green;"));
         border2.setStyle(("-fx-background-color: green;"));
-        rulesBorder.setStyle(("-fx-background-color: green;"));
+       // rulesBorder.setStyle(("-fx-background-color: green;"));
         Scene firstScene = new Scene(border2,1200,700);
         rules.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+
                 primaryStage.setScene(rulesScreen);
+                rulesBorder.setStyle(("-fx-background-color: green;"));
+
+
+                //rulesBox.setVisible(true);
+
             }
         });
         startB.setOnAction(new EventHandler<ActionEvent>() {
