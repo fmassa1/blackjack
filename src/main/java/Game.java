@@ -166,6 +166,7 @@ public class Game extends Application {
         betBorder.setStyle(("-fx-background-color: green;"));
         border.setStyle(("-fx-background-color: green;"));
         border2.setStyle(("-fx-background-color: green;"));
+        rulesBorder.setStyle(("-fx-background-color: green;"));
         Scene firstScene = new Scene(border2,1200,700);
         rules.setOnAction(new EventHandler<ActionEvent>() {
             @Override
