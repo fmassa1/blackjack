@@ -1,7 +1,7 @@
 // Ricky Massa and Zakareah Hafeez
 // 03/12/2024
 // Game.java
-// main file that supplies all the front end
+// main file that supplies all the front end, ecompasses UI aspects of program
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Game extends Application {
+    //decalration of used variables
     private Button startB, hitB, standB, raiseB, menuB, menu2, betB, nextBet, rules;
     private TextField t1, t2, t3;
     private VBox v1, v2, bankerV, userV, betV, mainV, endHand;
@@ -373,7 +374,7 @@ public class Game extends Application {
                 endHand.setVisible(true);
             }
         });
-
+        //enables button for continuous game play, redirecting user to betScreen
         nextBet.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -390,6 +391,7 @@ public class Game extends Application {
                 }
             }
         });
+        //provides return to menu option to escape gameplay, returns to startScreen
         menuB.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -398,7 +400,7 @@ public class Game extends Application {
                 t3.clear();
             }
         });
-
+        //button directs user to screen for Rules
         rules.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -434,7 +436,7 @@ public class Game extends Application {
                 primaryStage.setScene(ruleScene);
             }
         });
-
+    // menu button 2 allows user to escape ruleScene and return to startScreen
         menu2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
