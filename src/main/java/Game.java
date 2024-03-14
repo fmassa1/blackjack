@@ -75,10 +75,10 @@ public class Game extends Application {
         titleStatus.setFont(Font.font("Arial", 24));
         BorderPane.setAlignment(titleStatus, Pos.CENTER);
 
-        v1 = new VBox(20, title, titleStatus, startB, t1, rules);
+        v1 = new VBox(20, title, titleStatus, rules, startB, t1);
         v1.setAlignment(Pos.CENTER);
         border.setCenter(v1);
-        border.setMargin(v1, new Insets(12,12,12,12));
+        border.setMargin(v1, new Insets(12,450,12,450));
 
         Scene startScreen = new Scene(border,1200,700);
         //end of StartScreen code
@@ -103,11 +103,10 @@ public class Game extends Application {
         t3.setPrefWidth(150);
         t3.setAlignment(Pos.CENTER);
 
-        betV = new VBox(20, balance, betB, t3);
+        betV = new VBox(20, betTitle, balance, betB, t3);
         betV.setAlignment(Pos.CENTER);
-        betBorder.setBottom(betV);
-        betBorder.setCenter(betTitle);
-        betBorder.setMargin(betV, new Insets(12,12,250,12));
+        betBorder.setCenter(betV);
+        betBorder.setMargin(betV, new Insets(12,450,12,450));
 
         Scene betScreen = new Scene(betBorder,1200,700);
         //end of bet screen
@@ -137,7 +136,6 @@ public class Game extends Application {
         userLabel.setText("Player's Hand");
         userLabel.setFont(Font.font("Arial", 24));
         BorderPane.setAlignment(userLabel, Pos.CENTER);
-
 
         gameStatus = new Text();
         gameStatus.setFont(Font.font("Arial", 32));
@@ -263,6 +261,9 @@ public class Game extends Application {
                         if(game.blackJackChecker(game.getBankerCards())) {
                             standB.fire();
                         }
+                        else if(game.blackJackChecker(game.getUserCards())) {
+                            standB.fire();
+                        }
                     }
 
 
@@ -336,7 +337,9 @@ public class Game extends Application {
         standB.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                game.bankerHit();
+                if(!game.blackJackChecker(game.getBankerCards()) && !game.blackJackChecker(game.getUserCards())) {
+                    game.bankerHit();
+                }
                 h2.getChildren().clear();
                 for(Card curCard : game.getBankerCards()) {
                     h2.getChildren().add(getCardImage(curCard.getValue() + curCard.getSuit() + ".png"));
@@ -357,7 +360,7 @@ public class Game extends Application {
                     gameStatus.setText("Banker has Blackjack");
                     winnings.setText("Lost $" + game.getBet());
                 }
-                else if(game.blackJackChecker(game.getBankerCards())) {
+                else if(game.blackJackChecker(game.getUserCards())) {
                     gameStatus.setText("User has Blackjack");
                     winnings.setText("Gained $" + winMoney);
                 }
@@ -368,12 +371,10 @@ public class Game extends Application {
                 else if(Objects.equals(winner, "player")) {
                     gameStatus.setText("User has won!");
                     winnings.setText("Gained $" + game.getBet());
-                    //game.setUserMoney(game.getUserMoney() + (game.getBet()*2));
                 }
                 else {
                     gameStatus.setText("User and Banker Tied");
                     winnings.setText("No change in balance");
-                    //game.setUserMoney(game.getUserMoney() + game.getBet());
                 }
                 game.setUserMoney(game.getUserMoney() + winMoney);
                 endHand.setVisible(true);
@@ -410,19 +411,21 @@ public class Game extends Application {
         rules.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                Text ruleTitle = new Text("Rules");
+                ruleTitle.setFont(Font.font("Arial", 64));
                 TextArea allRules= new TextArea();
-                allRules.setText("The goal of blackjack is to beat the dealer's hand without going over 21.\n "
-                        + "Numbered cards (2-10) are worth their face value. Face cards are each worth 10 points. \n"
-                        + "Aces can be worth either 1 or 11 points, depending on which value benefits the player.\n "
-                        + "Gameplay: Each player is dealt two cards face up, while the dealer receives one card face up and one card face down.\n "
-                        + "Hit: Players can request additional cards (hit) to improve their hand total. They can hit as many times as they like until they stand or bust.\n"
-                        + "Stand: Players can choose to keep their current hand total and not request any additional cards.\n"
-                        + "Bust: If a player's hand total exceeds 21, they bust and lose the round. \n"
-                        + "Dealer's Turn: After all players have completed their hands, the dealer reveals their face-down card and must hit until their hand total is 17 or higher.\n"
-                        + "Winning: Players win if their hand total is higher than the dealer's without exceeding 21. If the dealer busts, all remaining players win.\n"
-                        + "Push: If a player's hand total is the same as the dealer's, it's a push, and the player's bet is returned. \n"
-                        + "If a player's initial hand is an Ace and a 10-value card (10, Jack, Queen, King), they have a blackjack and typically win 1.5 times their bet, unless the dealer also has a blackjack, resulting in a push.");
-
+                allRules.setText("-The goal of blackjack is to beat the dealer's hand without going over 21.\n "
+                        + "-Numbered cards (2-10) are worth their face value. Face cards are each worth 10 points.\n"
+                        + "-Aces can be worth either 1 or 11 points, depending on which value benefits the player.\n "
+                        + "-Gameplay: Player is dealt two cards face up, while the dealer receives one card face up and one card face down.\n "
+                        + "-Hit: Player can request additional cards to improve their hand total. They can hit as many times as they like until they stand or bust.\n"
+                        + "-Stand: Player can choose to keep their current hand total and not request any additional cards.\n"
+                        + "-Bust: If the player's hand total exceeds 21, they bust and lose the round.\n"
+                        + "-Dealer's Turn: After the player has completed their hand, the dealer reveals their face-down card and must hit until their hand total is above 16.\n"
+                        + "-Winning: Player wins if their hand total is higher than the dealer's without busting. If the dealer busts, the player wins.\n"
+                        + "-Push: If the player's hand total is the same as the dealer's, it's a push, and the player's bet is returned.\n"
+                        + "-If the player wins with black jack, and Ace and a card with the value 10, they win 1.5x the winnings.\n"
+                        + "-If the banker has black jack off in their initial hand it is revealed and the player loses, unless user also has black jack, then it is a push.");
 
 
                 // Center the ScrollPane in the BorderPane
@@ -431,11 +434,11 @@ public class Game extends Application {
                 BorderPane rBorder = new BorderPane();
                 ScrollPane scroll = new ScrollPane();
                 scroll.setContent(allRules);
-                VBox rulesV = new VBox(scroll, menu2);
+                VBox rulesV = new VBox(20,ruleTitle,scroll, menu2);
                 rulesV.setAlignment(Pos.CENTER);
                 rBorder.setCenter(rulesV);
                 rBorder.setStyle(("-fx-background-color: green;"));
-                rBorder.setMargin(rulesV, new Insets(12, 200, 12, 200));
+                rBorder.setMargin(rulesV, new Insets(12, 342, 12, 342));
 
                 Scene ruleScene = new Scene(rBorder,1200,700);
                 primaryStage.setScene(ruleScene);
@@ -446,7 +449,7 @@ public class Game extends Application {
             @Override
             public void handle(ActionEvent actionEvent) {
                 primaryStage.setScene(startScreen);
-
+                t1.clear();
             }
         });
 
