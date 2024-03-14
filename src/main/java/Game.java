@@ -441,6 +441,15 @@ public class Game extends Application {
                 primaryStage.setScene(ruleScene);
             }
         });
+
+        menu2.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                primaryStage.setScene(startScreen);
+
+            }
+        });
+
         primaryStage.setScene(startScreen);
         primaryStage.show();
     }
