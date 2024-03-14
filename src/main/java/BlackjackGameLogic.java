@@ -1,3 +1,7 @@
+// Ricky Massa and Zaki Hafeez
+// 03/12/2024
+// BlackjackGameLogic.java
+// class that has all the game logic
 import java.util.ArrayList;
 import java.util.Collections;
 

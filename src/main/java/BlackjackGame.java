@@ -1,3 +1,7 @@
+// Ricky Massa and Zaki Hafeez
+// 03/12/2024
+// BlackjackGame.java
+// class that takes care of all the main function of the game
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Objects;

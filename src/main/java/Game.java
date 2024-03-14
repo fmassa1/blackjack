@@ -1,3 +1,8 @@
+// Ricky Massa and Zaki Hafeez
+// 03/12/2024
+// Game.java
+// main file that supplies all the front end
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

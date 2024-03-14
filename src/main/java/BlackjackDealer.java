@@ -1,3 +1,7 @@
+// Ricky Massa and Zaki Hafeez
+// 03/12/2024
+// BlackjackDealer.java
+// dealer class that takes care of everything involving the deck
 import java.util.ArrayList;
 import java.util.Collections;
 
