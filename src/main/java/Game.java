@@ -55,8 +55,16 @@ public class Game extends Application {
         //start of StartScreen code
         startB = new Button("Start Game");
         startB.setPrefWidth(150);
+
         rules = new Button("Rules");
         rules.setPrefWidth(150);
+        BorderPane rulesBorder = new BorderPane();
+        Text rulesText = new Text();
+        rulesText.setText("Blackjack Rules:");
+        rulesText.setFont(Font.font("Arial", 64));
+        BorderPane.setAlignment(rulesText, Pos.CENTER);
+        Scene rulesScreen = new Scene(rulesBorder,1200,700);
+
 
         t1 = new TextField();
         t1.setPrefWidth(150);
@@ -162,7 +170,7 @@ public class Game extends Application {
         rules.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-
+                primaryStage.setScene(rulesScreen);
             }
         });
         startB.setOnAction(new EventHandler<ActionEvent>() {
