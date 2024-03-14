@@ -24,7 +24,7 @@ import java.util.Objects;
 
 
 public class Game extends Application {
-    private Button startB, hitB, standB, raiseB, menuB, betB, nextBet;
+    private Button startB, hitB, standB, raiseB, menuB, betB, nextBet, rules;
     private TextField t1, t2, t3;
     private VBox v1, v2, bankerV, userV, betV, mainV, endHand;
     private HBox h1,h2;
@@ -55,6 +55,8 @@ public class Game extends Application {
         //start of StartScreen code
         startB = new Button("Start Game");
         startB.setPrefWidth(150);
+        rules = new Button("Rules");
+        rules.setPrefWidth(150);
 
         t1 = new TextField();
         t1.setPrefWidth(150);
@@ -72,12 +74,12 @@ public class Game extends Application {
         titleStatus.setFont(Font.font("Arial", 24));
         BorderPane.setAlignment(titleStatus, Pos.CENTER);
 
-        v1 = new VBox(20, title, titleStatus, startB, t1);
-        border.setCenter(v1);
+        v1 = new VBox(20, title, titleStatus, startB, t1, rules);
         v1.setAlignment(Pos.CENTER);
+        border.setCenter(v1);
         border.setMargin(v1, new Insets(12,12,12,12));
 
-        Scene startScreen = new Scene(border,700,700);
+        Scene startScreen = new Scene(border,1200,700);
         //end of StartScreen code
 
         //start of bet screen
@@ -106,7 +108,7 @@ public class Game extends Application {
         betBorder.setCenter(betTitle);
         betBorder.setMargin(betV, new Insets(12,12,250,12));
 
-        Scene betScreen = new Scene(betBorder,700,700);
+        Scene betScreen = new Scene(betBorder,1200,700);
         //end of bet screen
 
         //start of firstScene code
@@ -156,7 +158,7 @@ public class Game extends Application {
         betBorder.setStyle(("-fx-background-color: green;"));
         border.setStyle(("-fx-background-color: green;"));
         border2.setStyle(("-fx-background-color: green;"));
-        Scene firstScene = new Scene(border2,700,700);
+        Scene firstScene = new Scene(border2,1200,700);
 
         startB.setOnAction(new EventHandler<ActionEvent>() {
             @Override
