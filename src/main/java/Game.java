@@ -159,7 +159,12 @@ public class Game extends Application {
         border.setStyle(("-fx-background-color: green;"));
         border2.setStyle(("-fx-background-color: green;"));
         Scene firstScene = new Scene(border2,1200,700);
+        rules.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
 
+            }
+        });
         startB.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
