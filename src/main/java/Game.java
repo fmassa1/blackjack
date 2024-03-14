@@ -17,14 +17,15 @@ import javafx.geometry.Pos;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.util.converter.IntegerStringConverter;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
 
 public class Game extends Application {
-    private Button startB, hitB, standB, raiseB, menuB, betB, nextBet, rules;
+    private Button startB, hitB, standB, raiseB, menuB, menu2, betB, nextBet, rules;
     private TextField t1, t2, t3;
     private VBox v1, v2, bankerV, userV, betV, mainV, endHand;
     private HBox h1,h2;
@@ -55,19 +56,9 @@ public class Game extends Application {
         //start of StartScreen code
         startB = new Button("Start Game");
         startB.setPrefWidth(150);
-// rules scene
         rules = new Button("Rules");
         rules.setPrefWidth(150);
-        BorderPane rulesBorder = new BorderPane();
-        Text rulesText = new Text();
-        rulesText.setText("Blackjack Rules:");
-        rulesText.setFont(Font.font("Arial", 64));
-        BorderPane.setAlignment(rulesText, Pos.CENTER);
 
-        Scene rulesScreen = new Scene(rulesBorder,1200,700);
-
-
-// end rules scene
         t1 = new TextField();
         t1.setPrefWidth(150);
         t1.setPromptText("enter starting of money");
@@ -160,6 +151,8 @@ public class Game extends Application {
 
         menuB = new Button("Return to Menu");
         menuB.setPrefWidth(150);
+        menu2 = new Button("Return to Menu");
+        menu2.setPrefWidth(150);
         border2.setTop(menuB);
         border2.setCenter(bankerLabel);
         menuB.setAlignment((Pos.CENTER));
@@ -168,20 +161,9 @@ public class Game extends Application {
         betBorder.setStyle(("-fx-background-color: green;"));
         border.setStyle(("-fx-background-color: green;"));
         border2.setStyle(("-fx-background-color: green;"));
-       // rulesBorder.setStyle(("-fx-background-color: green;"));
+
         Scene firstScene = new Scene(border2,1200,700);
-        rules.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
 
-                primaryStage.setScene(rulesScreen);
-                rulesBorder.setStyle(("-fx-background-color: green;"));
-
-
-                //rulesBox.setVisible(true);
-
-            }
-        });
         startB.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -425,6 +407,40 @@ public class Game extends Application {
             }
         });
 
+        rules.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                TextArea allRules= new TextArea();
+                allRules.setText("The goal of blackjack is to beat the dealer's hand without going over 21.\n "
+                        + "Numbered cards (2-10) are worth their face value. Face cards are each worth 10 points. \n"
+                        + "Aces can be worth either 1 or 11 points, depending on which value benefits the player.\n "
+                        + "Gameplay: Each player is dealt two cards face up, while the dealer receives one card face up and one card face down.\n "
+                        + "Hit: Players can request additional cards (hit) to improve their hand total. They can hit as many times as they like until they stand or bust.\n"
+                        + "Stand: Players can choose to keep their current hand total and not request any additional cards.\n"
+                        + "Bust: If a player's hand total exceeds 21, they bust and lose the round. \n"
+                        + "Dealer's Turn: After all players have completed their hands, the dealer reveals their face-down card and must hit until their hand total is 17 or higher.\n"
+                        + "Winning: Players win if their hand total is higher than the dealer's without exceeding 21. If the dealer busts, all remaining players win.\n"
+                        + "Push: If a player's hand total is the same as the dealer's, it's a push, and the player's bet is returned. \n"
+                        + "If a player's initial hand is an Ace and a 10-value card (10, Jack, Queen, King), they have a blackjack and typically win 1.5 times their bet, unless the dealer also has a blackjack, resulting in a push.");
+
+
+
+                // Center the ScrollPane in the BorderPane
+                allRules.setWrapText(true);
+                allRules.setEditable(false);
+                BorderPane rBorder = new BorderPane();
+                ScrollPane scroll = new ScrollPane();
+                scroll.setContent(allRules);
+                VBox rulesV = new VBox(scroll, menu2);
+                rulesV.setAlignment(Pos.CENTER);
+                rBorder.setCenter(rulesV);
+                rBorder.setStyle(("-fx-background-color: green;"));
+                rBorder.setMargin(rulesV, new Insets(12, 200, 12, 200));
+
+                Scene ruleScene = new Scene(rBorder,1200,700);
+                primaryStage.setScene(ruleScene);
+            }
+        });
         primaryStage.setScene(startScreen);
         primaryStage.show();
     }
