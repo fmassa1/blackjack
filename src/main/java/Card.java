@@ -1,4 +1,4 @@
-// Ricky Massa and Zaki Hafeez
+// Ricky Massa and Zakareah Hafeez
 // 03/12/2024
 // Card.java
 // class for the cards

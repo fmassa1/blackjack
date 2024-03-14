@@ -1,3 +1,7 @@
+// Ricky Massa and Zakareah Hafeez
+// 03/12/2024
+// BlackjackGameTest.java
+// Testing for BlackjackGame: Through testing of BlackjackGame methods
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;

@@ -1,4 +1,7 @@
-
+// Ricky Massa and Zakareah Hafeez
+// 03/12/2024
+// BlackjackGameLogic.java
+// Tests BlackJackGameLogic:Who wins game and on what principals. Testing for hand calculations
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;

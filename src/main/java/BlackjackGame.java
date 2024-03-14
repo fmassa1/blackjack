@@ -1,4 +1,4 @@
-// Ricky Massa and Zaki Hafeez
+// Ricky Massa and Zakareah Hafeez
 // 03/12/2024
 // BlackjackGame.java
 // class that takes care of all the main function of the game

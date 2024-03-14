@@ -1,4 +1,4 @@
-// Ricky Massa and Zaki Hafeez
+// Ricky Massa and Zakareah Hafeez
 // 03/12/2024
 // Game.java
 // main file that supplies all the front end

@@ -1,4 +1,4 @@
-// Ricky Massa and Zaki Hafeez
+// Ricky Massa and Zakareah Hafeez
 // 03/12/2024
 // BlackjackDealer.java
 // dealer class that takes care of everything involving the deck

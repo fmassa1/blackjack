@@ -1,4 +1,4 @@
-// Ricky Massa and Zaki Hafeez
+// Ricky Massa and Zakareah Hafeez
 // 03/12/2024
 // BlackjackGameLogic.java
 // class that has all the game logic

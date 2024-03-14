@@ -1,3 +1,7 @@
+// Ricky Massa and Zakareah Hafeez
+// 03/12/2024
+// CardTest.java
+// Testing for Card.java, Tests initalizing Card
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
