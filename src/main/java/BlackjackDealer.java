@@ -15,6 +15,7 @@ public class BlackjackDealer {
     public void  generateDeck() {
         deck = new ArrayList<>();
         cardsLeft = 52;
+        //assign Suits, 14 cards per suit
         String[] suits = {"Hearts", "Diamonds", "Clubs", "Spades"};
         for(String suit : suits) {
             for(int i = 1; i < 14; i++){
@@ -31,12 +32,14 @@ public class BlackjackDealer {
         if(cardsLeft < 2) {
             return null;
         }
+        //draws 2 cards per hand initially
         ArrayList<Card> hand = new ArrayList<Card>();
         hand.add(drawOne());
         hand.add(drawOne());
         return hand;
 
     }
+    //draw method
     public Card drawOne() {
         if(cardsLeft == 0) {
             return null;
