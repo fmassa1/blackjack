@@ -1,7 +1,7 @@
 // Ricky Massa and Zakareah Hafeez
 // 03/12/2024
 // Game.java
-// main file that supplies all the front end, ecompasses UI aspects of program
+// main file that supplies all the front end
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -234,7 +234,6 @@ public class Game extends Application {
 
                         h1.setAlignment(Pos.CENTER);
                         h2.setAlignment(Pos.CENTER);
-                        //end card2
                         v2 = new VBox(20, hitB, standB, raiseB, t2, money, curBet);
                         v2.setAlignment(Pos.BOTTOM_CENTER);
 
@@ -420,7 +419,6 @@ public class Game extends Application {
                         + "-If the player wins with black jack, and Ace and a card with the value 10, they win 1.5x the winnings.\n"
                         + "-If the banker has black jack off in their initial hand it is revealed and the player loses, unless user also has black jack, then it is a push.");
 
-                // Center the ScrollPane in the BorderPane
                 allRules.setWrapText(true);
                 allRules.setEditable(false);
                 BorderPane rBorder = new BorderPane();

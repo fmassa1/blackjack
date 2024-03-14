@@ -3,9 +3,10 @@
 // Card.java
 // class for the cards
 public class Card {
-    //sets properties to card (suit,value)
+
     private String suit;
     private int value;
+    //sets properties to card (suit,value)
     public Card(String suit, int value) {
         this.suit = suit;
         this.value = value;

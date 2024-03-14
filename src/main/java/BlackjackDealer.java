@@ -52,8 +52,6 @@ public class BlackjackDealer {
     public int deckSize(){
         return cardsLeft;
     }
-    public ArrayList<Card> allCardsInDeck() {
-        return deck;
-    }
+
 }
 
