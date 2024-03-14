@@ -1,13 +1,10 @@
 import javafx.application.Application;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-//Card Image
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -19,10 +16,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
-
 import java.util.ArrayList;
 import java.util.Objects;
-
 
 public class Game extends Application {
     private Button startB, hitB, standB, raiseB, menuB, menu2, betB, nextBet, rules;
@@ -52,7 +47,6 @@ public class Game extends Application {
         BorderPane border = new BorderPane();
         border.setPadding(new Insets(12));
 
-
         //start of StartScreen code
         startB = new Button("Start Game");
         startB.setPrefWidth(150);
@@ -64,7 +58,6 @@ public class Game extends Application {
         t1.setPromptText("enter starting of money");
         t1.setAlignment(Pos.CENTER);
         border.setMargin(t1, new Insets(12,12,12,12));
-
 
         Text title = new Text();
         title.setText("Blackjack");
@@ -177,11 +170,8 @@ public class Game extends Application {
                         game.setUserMoney(Math.round(uMoney * 100.0) / 100.0);
                         money = new Text();
                         balance.setText("Current Balance: $" + game.getUserMoney());
-                        //money.setText("Current Balance: $" + game.getUserMoney());
                         money.setFont(Font.font("Arial", 12));
                         BorderPane.setAlignment(money, Pos.CENTER);
-
-
                         primaryStage.setScene(betScreen);
                     }
 
@@ -265,8 +255,6 @@ public class Game extends Application {
                             standB.fire();
                         }
                     }
-
-
                 } catch (NumberFormatException e) {
                     t3.clear();
                     t3.setPromptText("Error: enter a number");
@@ -389,14 +377,12 @@ public class Game extends Application {
                 if(game.getUserMoney() == 0) {
                     primaryStage.setScene(startScreen);
                     titleStatus.setText("Ran out of money. Try again");
-
                 }
                 else {
                     balance.setText("Current Balance: $" + game.getUserMoney());
                     money.setText("Current Balance: $" + game.getUserMoney());
                     primaryStage.setScene(betScreen);
                 }
-
             }
         });
         menuB.setOnAction(new EventHandler<ActionEvent>() {
@@ -427,7 +413,6 @@ public class Game extends Application {
                         + "-If the player wins with black jack, and Ace and a card with the value 10, they win 1.5x the winnings.\n"
                         + "-If the banker has black jack off in their initial hand it is revealed and the player loses, unless user also has black jack, then it is a push.");
 
-
                 // Center the ScrollPane in the BorderPane
                 allRules.setWrapText(true);
                 allRules.setEditable(false);
@@ -452,7 +437,6 @@ public class Game extends Application {
                 t1.clear();
             }
         });
-
         primaryStage.setScene(startScreen);
         primaryStage.show();
     }
